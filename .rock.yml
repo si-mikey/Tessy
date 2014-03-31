@@ -1,1 +1,15 @@
 runtime: node010
+
+
+tessy_start: |
+
+ nodejs app.js
+
+
+test:
+
+
+clean:
+
+
+
