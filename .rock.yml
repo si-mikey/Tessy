@@ -1,9 +1,9 @@
 runtime: node010
 
 
-tessy_start: |
+run: |
 
- nodejs app.js
+ node app.js
 
 
 test:
