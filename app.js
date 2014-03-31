@@ -30,11 +30,5 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
 });
 
-//var server = app.listen(8000, function(){
-
- //console.log('Tessy Started on port %d', server.address().port);
-
-//});
-
 
 
