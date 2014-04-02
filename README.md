@@ -34,4 +34,5 @@ Features:
        * priority/severity levels
        * categorization
        * attachments
-       * Test-case to ticket mapping 
+       * Test-case to ticket mapping
+       * Jira/Bugzilla integration
