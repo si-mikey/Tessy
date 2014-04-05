@@ -1,6 +1,5 @@
 var express = require('express');
 var routes = require('./lib/routes');
-var user = require('./lib/routes/user');
 var http = require('http');
 var path = require('path');
 
@@ -24,7 +23,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
