@@ -33,6 +33,7 @@ Features:
        * Track which SUTs and devices have higher passes, failures or skips
        * using shutterstock's rickshaw to view all types of graphs for data above
        * compare users/testers bug/executions counts
+       * SUT performance measurements
        
     Ticketing system
        * track bugs via tickets
