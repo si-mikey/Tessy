@@ -5,7 +5,6 @@ Tessy is a test manager written in nodejs.
 
 Features:
 =========
-
     Test-Cases
       * store 
       * categorize
