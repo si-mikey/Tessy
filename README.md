@@ -5,7 +5,6 @@ Tessy is a test manager written in nodejs.
 
 Features:
 =========
-
     Test-Cases
       * store 
       * categorize
@@ -27,6 +26,13 @@ Features:
        * Run w3c validation checks
        * take screenshots of pages
        * highlight UI bugs
+
+    Reporting
+       * View test-case execution counts ( passes, failures, skips ) 
+       * Track which SUTs and devices have higher passes, failures or skips
+       * using shutterstock's rickshaw to view all types of graphs for data above
+       * compare users/testers bug/executions counts
+       * SUT performance measurements
        
     Ticketing system
        * track bugs via tickets
