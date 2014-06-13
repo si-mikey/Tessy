@@ -22,9 +22,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//routes
 app.get('/', routes.index);
-
-
+app.get('/index', routes.index);
+app.get('/tests', routes.testcases);
+app.get('/reports', routes.reports);
+app.get('/manage', routes.manage);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
