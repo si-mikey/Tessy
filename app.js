@@ -37,7 +37,7 @@ app.get('/index', home.index);
 app.get('/tests', tests.index);
 app.get('/reports', reports.index);
 app.get('/manage', manage.index);
-app.get('/login', login.modal);
+app.get('/login', login.index);
 
 //db connection
 var dbobj = new db();
