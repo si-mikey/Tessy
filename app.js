@@ -40,20 +40,20 @@ app.get('/manage', manage.index);
 app.get('/login', login.index);
 
 //db connection
-var dbobj = new db();
-dbobj.connect({
-  host: '127.0.0.1',
-  user: 'root',
-  password: 'testing',
-  db: 'tessy'
-});
-
-dbobj.on('connect', function(){
-
-   console.log('db connected');
-
-});
-
+//var dbobj = new db();
+//dbobj.connect({
+//  host: '127.0.0.1',
+//  user: 'root',
+//  password: 'testing',
+//  db: 'tessy'
+//});
+//
+//dbobj.on('connect', function(){
+//
+//   console.log('db connected');
+//
+//});
+//
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
