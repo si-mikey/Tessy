@@ -1,4 +1,16 @@
 div[role=navigation] .container { margin-left: 0px; }
+
+.container .col-md-4{
+  margin: 0 auto;
+  width: 40%;
+  float: none;
+  padding-top: 100px;
+}
+
+.container .col-md-4 .panel-default{
+  padding: 5px;
+}
+
 #footer { 
   position: absolute;
   bottom: 0;
