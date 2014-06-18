@@ -3,12 +3,7 @@ var http    = require('http');
 var path    = require('path');
 var db      = require('mariasql');
 
-//routes
-var home    = require('./lib/routes/index.js');
-var tests   = require('./lib/routes/testcases.js');
-var reports = require('./lib/routes/reports.js');
-var manage  = require('./lib/routes/manage.js');
-var login   = require('./lib/routes/login.js');
+var routes    = require('./lib/routes');
 
 var app = express();
 
@@ -32,12 +27,13 @@ if ('development' == app.get('env')) {
 }
 
 //route mappers
-app.get('/', home.index);
-app.get('/index', home.index);
-app.get('/tests', tests.index);
-app.get('/reports', reports.index);
-app.get('/manage', manage.index);
-app.get('/login', login.index);
+app.get('/', routes.home);
+app.get('/index', routes.home);
+app.get('/home', routes.home);
+app.get('/testcases', routes.testcases);
+app.get('/reports', routes.reports);
+app.get('/manage', routes.manage);
+app.get('/login', routes.login);
 
 //db connection
 //var dbobj = new db();
