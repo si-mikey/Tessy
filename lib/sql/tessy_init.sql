@@ -1,6 +1,4 @@
-
-
-
+CREATE DATABASE IF NOT EXISTS `tessy`
 
 -- ---
 -- Globals
