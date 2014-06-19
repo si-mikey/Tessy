@@ -7,14 +7,14 @@ div.container
       h3.panel-title
         strong Sign in
     div.panel-body
-     form(role="form")
-    div.form-group
-      label(for="email") Email
-      input.form-control#email(type="email", placeholder="Enter Email")
-    div.form-group
-      label(for="password") Password
-        a(href="/frgpwd")  (forgot password)
-      input.form-control#password(type="password", placeholder="Enter Password")
-    button.btn.btn-sm.bt-default(type="submit") Sign In
+     form(role="form" action="/dologin" method="post")
+      div.form-group
+        label(for="email") Email
+        input.form-control#email(type="email", placeholder="Enter Email")
+      div.form-group
+        label(for="password") Password
+          a(href="/frgpwd")  (forgot password)
+        input.form-control#password(type="password", placeholder="Enter Password")
+      button.btn.btn-sm.bt-default(type="submit") Sign In
 
 include comps/footer.jade
