@@ -10,11 +10,11 @@ div.container
      form(role="form" action="/dologin" method="post")
       div.form-group
         label(for="email") Email
-        input.form-control#email(type="email", placeholder="Enter Email")
+        input.form-control#email(name="email" type="email", placeholder="Enter Email")
       div.form-group
         label(for="password") Password
           a(href="/frgpwd")  (forgot password)
-        input.form-control#password(type="password", placeholder="Enter Password")
+        input.form-control#password(name="password" type="password", placeholder="Enter Password")
       button.btn.btn-sm.bt-default(type="submit") Sign In
 
 include comps/footer.jade

@@ -5,7 +5,6 @@ var db      = require('mariasql');
 
 var routes    = require('./lib/routes');
 
-
 var app = express();
 
 // all environments
@@ -14,7 +13,7 @@ app.set('views', path.join(__dirname, 'lib/views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.cookieParser());
-app.use(express.session({secret: '123456789'}));
+app.use(express.session({secret: process.env.SECRET_SESS_KEY}));
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());

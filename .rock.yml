@@ -1,8 +1,9 @@
 runtime: node010
 
 
-run: |
-
+run_web: |
+ #TODO: temp sess secret
+ export SECRET_SESS_KEY=$RANDOM$RANDOM$RANDOM 
  node app.js
 
 
