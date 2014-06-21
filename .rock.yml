@@ -6,6 +6,9 @@ run_web: |
  export SECRET_SESS_KEY=$RANDOM$RANDOM$RANDOM 
  node app.js
 
+s: |
+ exec rock run_web
+
 
 test:
 
