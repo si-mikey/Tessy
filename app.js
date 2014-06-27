@@ -1,7 +1,6 @@
 var express = require('express');
 var http    = require('http');
 var path    = require('path');
-var db      = require('mariasql');
 
 var routes    = require('./lib/routes');
 
