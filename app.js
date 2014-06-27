@@ -36,20 +36,6 @@ app.get('/manage', routes.manage);
 app.get('/login', routes.login);
 app.post('/dologin', routes.dologin);
 
-//db connection
-//var dbobj = new db();
-//dbobj.connect({
-//  host: '127.0.0.1',
-//  user: 'root',
-//  password: 'testing',
-//  db: 'tessy'
-//});
-//
-//dbobj.on('connect', function(){
-//
-//   console.log('db connected');
-//
-//});
 
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
