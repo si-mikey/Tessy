@@ -1,6 +1,7 @@
 var express = require('express');
 var http    = require('http');
 var path    = require('path');
+var yaml    = require('yamljs');
 
 var routes    = require('./lib/routes');
 
@@ -35,7 +36,6 @@ app.get('/reports', routes.reports);
 app.get('/manage', routes.manage);
 app.get('/login', routes.login);
 app.post('/dologin', routes.dologin);
-
 
 //start the server
 http.createServer(app).listen(app.get('port'), function(){

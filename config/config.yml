@@ -1,0 +1,20 @@
+development:
+  server:
+    port: 8000
+  database: 
+    host: '127.0.0.1'
+    port: 3306 
+    db: 'tessy' 
+    user: 'root' 
+    password: 'testing' 
+production:
+  server:
+    port: 8000
+  database: 
+    host: 'prod_host'
+    port: ''
+    db: 'prod_db'
+    user: 'dbuser'
+    password: 'pass'
+  cache:
+    dir: 'static'
