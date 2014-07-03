@@ -1,5 +1,11 @@
 runtime: node010
 
+env_dev: 
+  SITE_MODE: 'dev'  
+
+env_prod: 
+ SITE_MODE: 'prod'
+ 
 
 run_web: |
  #TODO: temp sess secret
