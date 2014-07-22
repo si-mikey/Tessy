@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 8000);
 app.set('views', path.join(__dirname, 'lib/views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
-app.use(express.cookieParser());
+//app.use(express.cookieParser());
 app.use(express.session({secret: process.env.SECRET_SESS_KEY}));
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -23,7 +23,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
+if ('dev' == app.get('SITE_MODE')) {
   app.use(express.errorHandler());
 }
 
