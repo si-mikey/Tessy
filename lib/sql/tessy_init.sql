@@ -31,6 +31,7 @@ CREATE TABLE `users` (
   `first_name` VARCHAR(50) NULL DEFAULT NULL,
   `last_name` VARCHAR(50) NULL DEFAULT NULL,
   `password_hash` VARCHAR(100) NULL DEFAULT NULL,
+  `email_main` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
