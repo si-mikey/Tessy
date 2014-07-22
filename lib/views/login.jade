@@ -1,5 +1,4 @@
 include comps/header.jade
-
 div.container
  div.col-md-4.col.md-offset-4
   div.panel.panel-default
@@ -8,6 +7,9 @@ div.container
         strong Sign in
     div.panel-body
      form(role="form" action="/dologin" method="post")
+      if(locals.loginError) 
+       div.alert.alert-error Incorrect Credentials!
+        button(class="close", data-dismiss="alert") x
       div.form-group
         label(for="email") Email
         input.form-control#email(name="email" type="email", placeholder="Enter Email")

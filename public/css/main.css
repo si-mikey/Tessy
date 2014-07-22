@@ -11,6 +11,22 @@ div[role=navigation] .container { margin-left: 0px; }
   padding: 5px;
 }
 
+.alert-error{
+  color: #b94a48;
+  background-color: #f2dede;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #footer { 
   position: absolute;
   bottom: 0;
