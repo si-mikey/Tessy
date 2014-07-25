@@ -23,3 +23,10 @@ html
               a(href='/reports', id='nav-reports') Reports
             li
               a(href='/manage', id='nav-manage') Manage
+         if(locals.userName)
+          div.btn-group
+            button.btn.btn-default.btn-sm.dropdown-toggle(type="button", data-toggle="dropdown")= locals.userName 
+             span.caret
+            ul.dropdown-menu(role="menu")
+              li
+                a(tabindex="-1", href="#") Settings

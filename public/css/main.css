@@ -11,14 +11,30 @@ div[role=navigation] .container { margin-left: 0px; }
   padding: 5px;
 }
 
+
+
+/*
+
+
+
+*/
 .alert-error{
   color: #b94a48;
   background-color: #f2dede;
 }
 
+.btn-group{
+  position: absolute;
+  right:  100px;
+  top:  10px;
+} 
 
-
-
+@media (max-width:800px){ 
+  .btn-group { 
+    display: none;
+  }
+}
+ 
 
 
 
