@@ -25,9 +25,18 @@ div[role=navigation] .container { margin-left: 0px; }
 
 .btn-group{
   position: absolute;
-  right:  100px;
+  right:  10px;
   top:  10px;
 } 
+
+.btn-group .caret{
+  margin-left: 5px;
+}
+
+.dropdown-menu{
+  left: auto;
+  right: 0;
+}
 
 @media (max-width:800px){ 
   .btn-group { 
