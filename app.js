@@ -23,19 +23,43 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('dev' == app.get('SITE_MODE')) {
+if ('dev' == process.env.SITE_MODE) {
   app.use(express.errorHandler());
 }
 
+//verify user is logged in to view routes
+function requireLoggedIn(req, res, next){
+  var routeName = req.route.params[0];
+  if(typeof req.session.user == 'undefined' && routeName != 'login'){
+      res.redirect('/login'); 
+    }else{
+      next();
+    }
+}    
+
+//set locals to all views if user is logged in
+function setLocals(req, res, next){
+  if(typeof req.session.user == 'object'){
+    var user = req.session.user;
+    res.locals.userName =  user.userName; 
+  }  
+    next();
+}
+
+//array of callbacks for routes
+var cbs = [requireLoggedIn, setLocals];
+
 //route mappers
-app.get('/', routes.home);
-app.get('/index', routes.home);
-app.get('/home', routes.home);
-app.get('/testcases', routes.testcases);
-app.get('/reports', routes.reports);
-app.get('/manage', routes.manage);
+//app.get('/*', requireLoggedIn);
+app.get('/', cbs, routes.home);
+app.get('/index', cbs, routes.home);
+app.get('/home', cbs, routes.home);
+app.get('/testcases', cbs, routes.testcases);
+app.get('/reports', cbs, routes.reports);
+app.get('/manage', cbs, routes.manage);
 app.get('/login', routes.login);
 app.post('/dologin', routes.dologin);
+app.get('/account', cbs, routes.myaccount);
 
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
