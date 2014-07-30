@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.11-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.19, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: tessy
 -- ------------------------------------------------------
--- Server version	10.0.11-MariaDB-1~saucy-log
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -50,8 +50,9 @@ DROP TABLE IF EXISTS `testcases`;
 CREATE TABLE `testcases` (
   `tc_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `tc_scenario` varchar(255) NOT NULL,
+  `tc_steps` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`tc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,6 +61,7 @@ CREATE TABLE `testcases` (
 
 LOCK TABLES `testcases` WRITE;
 /*!40000 ALTER TABLE `testcases` DISABLE KEYS */;
+INSERT INTO `testcases` VALUES (1,'Verify login functionality','1,2,3,4,5');
 /*!40000 ALTER TABLE `testcases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,16 +73,11 @@ DROP TABLE IF EXISTS `testcases_steps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `testcases_steps` (
-  `ts_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `tc_id` smallint(5) unsigned NOT NULL,
-  `ts_given` varchar(255) DEFAULT NULL,
-  `ts_when` varchar(255) DEFAULT NULL,
-  `ts_then` varchar(255) DEFAULT NULL,
-  `ts_but` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ts_id`),
-  KEY `tc_id` (`tc_id`),
-  CONSTRAINT `testcases_steps_ibfk_1` FOREIGN KEY (`tc_id`) REFERENCES `testcases` (`tc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `st_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `st_type` varchar(20) DEFAULT NULL,
+  `st_text` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`st_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +86,7 @@ CREATE TABLE `testcases_steps` (
 
 LOCK TABLES `testcases_steps` WRITE;
 /*!40000 ALTER TABLE `testcases_steps` DISABLE KEYS */;
+INSERT INTO `testcases_steps` VALUES (1,'given','I load the Login page'),(2,'when','I enter valid credentials'),(3,'and','I submit the form'),(4,'then','I should be logged in'),(5,'And','I see username in the header');
 /*!40000 ALTER TABLE `testcases_steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,4 +127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-26 15:17:47
+-- Dump completed on 2014-07-30 18:54:20
