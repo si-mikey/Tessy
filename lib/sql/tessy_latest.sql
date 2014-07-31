@@ -41,6 +41,107 @@ LOCK TABLES `accounts` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `company`
+--
+
+DROP TABLE IF EXISTS `company`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company` (
+  `company_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`company_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company`
+--
+
+LOCK TABLES `company` WRITE;
+/*!40000 ALTER TABLE `company` DISABLE KEYS */;
+/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `component`
+--
+
+DROP TABLE IF EXISTS `component`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `component` (
+  `co_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `co_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`co_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `component`
+--
+
+LOCK TABLES `component` WRITE;
+/*!40000 ALTER TABLE `component` DISABLE KEYS */;
+INSERT INTO `component` VALUES (1,'Login');
+/*!40000 ALTER TABLE `component` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `relate`
+--
+
+DROP TABLE IF EXISTS `relate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `relate` (
+  `r_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `c_id` smallint(5) unsigned DEFAULT NULL,
+  `t_id` smallint(5) unsigned DEFAULT NULL,
+  `co_id` smallint(5) unsigned DEFAULT NULL,
+  PRIMARY KEY (`r_id`),
+  KEY `c_id` (`c_id`),
+  KEY `t_id` (`t_id`),
+  KEY `co_id` (`co_id`),
+  CONSTRAINT `relate_ibfk_3` FOREIGN KEY (`co_id`) REFERENCES `component` (`co_id`),
+  CONSTRAINT `relate_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `company` (`company_id`),
+  CONSTRAINT `relate_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `team` (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `relate`
+--
+
+LOCK TABLES `relate` WRITE;
+/*!40000 ALTER TABLE `relate` DISABLE KEYS */;
+/*!40000 ALTER TABLE `relate` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `team`
+--
+
+DROP TABLE IF EXISTS `team`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `team` (
+  `team_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `team_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`team_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `team`
+--
+
+LOCK TABLES `team` WRITE;
+/*!40000 ALTER TABLE `team` DISABLE KEYS */;
+/*!40000 ALTER TABLE `team` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `testcases`
 --
 
@@ -51,8 +152,11 @@ CREATE TABLE `testcases` (
   `tc_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `tc_scenario` varchar(255) NOT NULL,
   `tc_steps` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`tc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `tc_relate_id` smallint(5) unsigned DEFAULT NULL,
+  PRIMARY KEY (`tc_id`),
+  KEY `tc_relate_id` (`tc_relate_id`),
+  CONSTRAINT `testcases_ibfk_1` FOREIGN KEY (`tc_relate_id`) REFERENCES `relate` (`r_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +165,7 @@ CREATE TABLE `testcases` (
 
 LOCK TABLES `testcases` WRITE;
 /*!40000 ALTER TABLE `testcases` DISABLE KEYS */;
-INSERT INTO `testcases` VALUES (1,'Verify login functionality','1,2,3,4,5');
+INSERT INTO `testcases` VALUES (1,'Verify login functionality','1,2,3,4,5',NULL),(3,'verify search','1,2',NULL);
 /*!40000 ALTER TABLE `testcases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-30 18:54:20
+-- Dump completed on 2014-07-31 19:18:36
