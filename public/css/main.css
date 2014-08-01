@@ -23,13 +23,13 @@ div[role=navigation] .container { margin-left: 0px; }
   background-color: #f2dede;
 }
 
-.btn-group{
+.container .btn-group{
   position: absolute;
   right:  10px;
   top:  10px;
 } 
 
-.btn-group .caret{
+.container .btn-group .caret{
   margin-left: 5px;
 }
 
@@ -39,11 +39,24 @@ div[role=navigation] .container { margin-left: 0px; }
 }
 
 @media (max-width:800px){ 
-  .btn-group { 
+  .container .btn-group { 
     display: none;
   }
 }
  
+
+.container-fluid .row-fluid {
+  margin-top: 55px;
+}
+
+
+
+
+
+
+
+
+
 
 
 
