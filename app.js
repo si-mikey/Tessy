@@ -41,7 +41,7 @@ function requireLoggedIn(req, res, next){
 function setLocals(req, res, next){
   if(typeof req.session.user == 'object'){
     var user = req.session.user;
-    res.locals.userName =  user.userName; 
+    res.locals.user = user; 
   }  
     next();
 }
