@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.12-MariaDB, for osx10.9 (i386)
+-- MySQL dump 10.13  Distrib 5.6.19, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: tessy
 -- ------------------------------------------------------
--- Server version	10.0.12-MariaDB
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -51,7 +51,7 @@ CREATE TABLE `company` (
   `company_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `company_name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'Shutterstock');
+INSERT INTO `company` VALUES (1,'Shutterstock'),(2,'OffSet'),(3,'SkillFeed');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +131,7 @@ CREATE TABLE `team` (
   `team_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `team_name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +140,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Customer'),(2,'Search');
+INSERT INTO `team` VALUES (1,'Customer'),(2,'Search'),(3,'Mobile');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-03 13:00:35
+-- Dump completed on 2014-08-04 18:29:29
