@@ -11,13 +11,6 @@ div[role=navigation] .container { margin-left: 0px; }
   padding: 5px;
 }
 
-
-
-/*
-
-
-
-*/
 .alert-error{
   color: #b94a48;
   background-color: #f2dede;
@@ -29,11 +22,11 @@ div[role=navigation] .container { margin-left: 0px; }
   top:  10px;
 } 
 
-.container .btn-group .caret{
+.btn-group .caret{
   margin-left: 5px;
 }
 
-.dropdown-menu{
+.container .dropdown-menu{
   left: auto;
   right: 0;
 }
@@ -44,7 +37,6 @@ div[role=navigation] .container { margin-left: 0px; }
   }
 }
  
-
 .container-fluid .row-fluid {
   margin-top: 55px;
 }

@@ -37,7 +37,7 @@ function requireLoggedIn(req, res, next){
     }
 }    
 
-//set locals to all views if user is logged in
+//set shared locals to all views if user is logged in
 function setLocals(req, res, next){
   if(typeof req.session.user == 'object'){
     var user = req.session.user;
