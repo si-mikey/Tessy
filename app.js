@@ -54,7 +54,15 @@ var cbs = [requireLoggedIn, setLocals];
 app.get('/', cbs, routes.home);
 app.get('/index', cbs, routes.home);
 app.get('/home', cbs, routes.home);
+
+
 app.get('/testcases', cbs, routes.testcases);
+
+app.get('/testcases/:company', cbs, testcases.company);
+app.get('/testcases/:company/:team/', cbs, testcases.team);
+app.get('/testcases/:company/:team/:component', cbs, testcases.component);
+
+
 app.get('/reports', cbs, routes.reports);
 app.get('/manage', cbs, routes.manage);
 app.get('/login', routes.login);
