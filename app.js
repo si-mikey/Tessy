@@ -4,6 +4,8 @@ var path    = require('path');
 var yaml    = require('yamljs');
 
 var routes    = require('./lib/routes');
+var testcases = require('./lib/routes/testcases.js');
+
 
 var app = express();
 
@@ -56,7 +58,10 @@ app.get('/index', cbs, routes.home);
 app.get('/home', cbs, routes.home);
 
 
-app.get('/testcases', cbs, routes.testcases);
+app.get('/testcases', cbs, function(req, res, next){
+      
+     testcases.defaultView(req, res);
+});
 
 app.get('/testcases/:company', cbs, testcases.company);
 app.get('/testcases/:company/:team/', cbs, testcases.team);
