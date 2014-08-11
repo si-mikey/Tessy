@@ -5,7 +5,6 @@ var yaml    = require('yamljs');
 
 var routes    = require('./lib/routes');
 var testcases = require('./lib/routes/testcases.js');
-
 var app = express();
 
 // all environments
@@ -57,20 +56,11 @@ app.get('/index', cbs, routes.home);
 app.get('/home', cbs, routes.home);
 
 
-app.get('/testcases', cbs, function(req, res, next){
-      
-     testcases.renderView(req, res);
-     next();
-});
+app.get('/testcases', cbs, testcases.getCompanies);
 
-app.get('/testcases/:company', cbs, function(req, res, next){
+//app.get('/testcases/:company/', cbs, testcases.company);
+//app.get('/testcases/:company/:team/', cbs, testcases.team);
 
-    testcases.company(req, res);
-    next();
-});
-
-app.get('/testcases/:company/:team/', cbs, testcases.team);
-app.get('/testcases/:company/:team/:component', cbs, testcases.component);
 
 app.get('/reports', cbs, routes.reports);
 app.get('/manage', cbs, routes.manage);
