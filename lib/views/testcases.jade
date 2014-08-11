@@ -8,8 +8,12 @@ div.container-fluid
         button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Company
          span.caret
         ul.dropdown-menu(role="menu")
-         li 
-          a(href="/shutterstock")= locals.companies 
+         li
+          if(locals.companies)
+            each company in locals.companies 
+              a(href="/testcases/#{company}")= company 
+
+      
 
 
 

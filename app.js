@@ -56,9 +56,17 @@ app.get('/index', cbs, routes.home);
 app.get('/home', cbs, routes.home);
 
 
-app.get('/testcases', cbs, testcases.getCompanies);
+app.get('/testcases', cbs, testcases.getCompanies, function(req, res){
+    
+    res.render('testcases', {title: 'Tessy - Testcases'});
 
-//app.get('/testcases/:company/', cbs, testcases.company);
+});
+
+//app.get('/testcases/:company', cbs, testcases.team, function(req, res){
+ //   console.log(res.locals);
+
+//});
+
 //app.get('/testcases/:company/:team/', cbs, testcases.team);
 
 
