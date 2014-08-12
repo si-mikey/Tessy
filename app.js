@@ -55,6 +55,7 @@ app.get('/', cbs, routes.home);
 app.get('/index', cbs, routes.home);
 app.get('/home', cbs, routes.home);
 
+//TODO: merge these three routes into 1
 app.get('/testcases', cbs, testcases.getCompanies, function(req, res){
 
     res.locals.companies = req.session.companies;
@@ -71,9 +72,10 @@ app.get('/testcases/:company', cbs, testcases.getTeams, function(req, res){
     res.render('testcases', {title: 'Tessy - Testcases'});
 });
 
-app.get('/testcases/:company/:team/', cbs, testcases.getComponents, function(req, res){
-
-    
+app.get('/testcases/:company/:team', cbs, testcases.getComponents, function(req, res){
+  
+      console.log(req.session);
+      res.render('testcases', {title: 'Tessy - Testcases'});    
 
 });
 
