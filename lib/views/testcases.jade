@@ -11,17 +11,15 @@ div.container-fluid
          li
           if(locals.companies)
             each company in locals.companies 
-              a(href="/testcases/#{company}")= company 
-
-      
-
-
-
-
-
-
-
-
+              a(href="/testcases/#{company}")= company
+      if(locals.teams)
+        div.btn-group#teams
+          button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Team 
+           span.caret
+          ul.dropdown-menu(role="menu")
+           li
+              each team in locals.teams 
+                a(href="/testcases/#{company}/#{team}")= team 
 
 
 

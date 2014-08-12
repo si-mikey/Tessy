@@ -55,19 +55,27 @@ app.get('/', cbs, routes.home);
 app.get('/index', cbs, routes.home);
 app.get('/home', cbs, routes.home);
 
-
 app.get('/testcases', cbs, testcases.getCompanies, function(req, res){
-    
+
+    res.locals.companies = req.session.companies;
     res.render('testcases', {title: 'Tessy - Testcases'});
 
 });
 
-//app.get('/testcases/:company', cbs, testcases.team, function(req, res){
- //   console.log(res.locals);
+app.get('/testcases/:company', cbs, testcases.getTeams, function(req, res){
+    
+    var company = req.params.company;
+    res.locals.company = company;
+    res.locals.companies = req.session.companies;
+    res.locals.teams = req.session.teams;
+    res.render('testcases', {title: 'Tessy - Testcases'});
+});
 
-//});
+app.get('/testcases/:company/:team/', cbs, testcases.getComponents, function(req, res){
 
-//app.get('/testcases/:company/:team/', cbs, testcases.team);
+    
+
+});
 
 
 app.get('/reports', cbs, routes.reports);
