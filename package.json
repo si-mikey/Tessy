@@ -6,11 +6,12 @@
     "type"   : "git",
     "url"    : "http://github.com/si-mikey/Tessy.git"
   },
-  "dependencies": {
-    "express"   : "3.x",
-    "jade"      : "*",
-    "mariasql"  : "*",
-    "yamljs"    : "*",
-    "bcryptjs"  : "*"
+  "dependencies"  : {
+    "express"     : "3.x",
+    "jade"        : "*",
+    "mariasql"    : "*",
+    "yamljs"      : "*",
+    "bcryptjs"    : "*",
+    "underscore"  : "*"
   }
 }
