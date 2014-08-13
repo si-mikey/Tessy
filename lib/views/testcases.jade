@@ -20,6 +20,14 @@ div.container-fluid
            li
               each team in locals.teams 
                 a(href="/testcases/#{company}/#{team}")= team 
+      if(locals.components)
+        div.btn-group#components
+          button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Components 
+           span.caret
+          ul.dropdown-menu(role="menu")
+           li
+              each component in locals.components 
+                a(href="/testcases/#{company}/#{team}/#{component}")= component 
 
 
 

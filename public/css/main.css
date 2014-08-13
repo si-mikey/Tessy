@@ -42,7 +42,7 @@ div[role=navigation] .container { margin-left: 0px; }
 }
 
 
-#teams {
+.row-fluid .btn-group {
   margin-left:10px;
 }
 
