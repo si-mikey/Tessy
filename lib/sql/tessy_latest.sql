@@ -51,7 +51,7 @@ CREATE TABLE `company` (
   `company_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `company_name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'Shutterstock'),(2,'OffSet'),(3,'SkillFeed');
+INSERT INTO `company` VALUES (1,'Shutterstock'),(2,'OffSet'),(3,'SkillFeed'),(4,'BigStock');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `relate` (
   CONSTRAINT `relate_ibfk_3` FOREIGN KEY (`co_id`) REFERENCES `component` (`co_id`),
   CONSTRAINT `relate_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `company` (`company_id`),
   CONSTRAINT `relate_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `team` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +116,7 @@ CREATE TABLE `relate` (
 
 LOCK TABLES `relate` WRITE;
 /*!40000 ALTER TABLE `relate` DISABLE KEYS */;
-INSERT INTO `relate` VALUES (1,1,1,1);
+INSERT INTO `relate` VALUES (1,1,1,1),(2,1,2,1),(3,1,3,1);
 /*!40000 ALTER TABLE `relate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-04 18:29:29
+-- Dump completed on 2014-08-12 19:40:50

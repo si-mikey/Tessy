@@ -8,16 +8,26 @@ div.container-fluid
         button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Company
          span.caret
         ul.dropdown-menu(role="menu")
-         li 
-          a(href="testcases/company/shutterstock") Shutterstock 
-
-
-
-
-
-
-
-
+         li
+          if(locals.companies)
+            each company in locals.companies 
+              a(href="/testcases/#{company}")= company
+      if(locals.teams)
+        div.btn-group#teams
+          button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Team 
+           span.caret
+          ul.dropdown-menu(role="menu")
+           li
+              each team in locals.teams 
+                a(href="/testcases/#{company}/#{team}")= team 
+      if(locals.components)
+        div.btn-group#components
+          button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Components 
+           span.caret
+          ul.dropdown-menu(role="menu")
+           li
+              each component in locals.components 
+                a(href="/testcases/#{company}/#{team}/#{component}")= component 
 
 
 

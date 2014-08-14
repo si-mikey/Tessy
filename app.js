@@ -4,7 +4,7 @@ var path    = require('path');
 var yaml    = require('yamljs');
 
 var routes    = require('./lib/routes');
-
+var testcases = require('./lib/routes/testcases.js');
 var app = express();
 
 // all environments
@@ -54,7 +54,36 @@ var cbs = [requireLoggedIn, setLocals];
 app.get('/', cbs, routes.home);
 app.get('/index', cbs, routes.home);
 app.get('/home', cbs, routes.home);
-app.get('/testcases', cbs, routes.testcases);
+
+app.get('/testcases', cbs, testcases.getCompanies, function(req, res){
+
+    res.locals.companies = req.session.companies;
+    res.render('testcases', {title: 'Tessy - Testcases'});
+
+});
+
+var db_ct = [testcases.getCompanies, testcases.getTeams]; 
+app.get('/testcases/:company', cbs, db_ct, function(req, res){
+    
+    res.locals.company    = req.params.company;
+    res.locals.companies  = req.session.companies;
+    res.locals.teams      = req.session.teams;
+    res.render('testcases', {title: 'Tessy - Testcases'});
+});
+
+var db_ctc = [testcases.getCompanies, testcases.getTeams, testcases.getComponents];
+app.get('/testcases/:company/:team', cbs, db_ctc, function(req, res){
+    
+    res.locals.company    = req.params.company;
+    res.locals.team       = req.params.team;
+    res.locals.companies  = req.session.companies;
+    res.locals.teams      = req.session.teams;
+    res.locals.components = req.session.components; 
+    console.log(res.locals);
+    res.render('testcases', {title: 'Tessy - Testcases'});    
+});
+
+
 app.get('/reports', cbs, routes.reports);
 app.get('/manage', cbs, routes.manage);
 app.get('/login', routes.login);
