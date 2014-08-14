@@ -50,7 +50,6 @@ function setLocals(req, res, next){
 var defaultCallbacks = [requireLoggedIn, setLocals];
 
 //route mappers
-//app.get('/*', requireLoggedIn);
 app.get('/', defaultCallbacks, routes.home);
 app.get('/index', defaultCallbacks, routes.home);
 app.get('/home', defaultCallbacks, routes.home);
@@ -93,6 +92,12 @@ app.get('/manage', defaultCallbacks, routes.manage);
 app.get('/login', routes.login);
 app.post('/dologin', routes.dologin);
 app.get('/account', defaultCallbacks, routes.myaccount);
+app.get('/logout', function(req, res, next){
+    
+     req.session.destroy();
+     res.redirect('/index'); 
+     next();
+});
 
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
