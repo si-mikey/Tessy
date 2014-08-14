@@ -79,7 +79,6 @@ app.get('/testcases/:company/:team', cbs, db_ctc, function(req, res){
     res.locals.companies  = req.session.companies;
     res.locals.teams      = req.session.teams;
     res.locals.components = req.session.components; 
-    console.log(res.locals);
     res.render('testcases', {title: 'Tessy - Testcases'});    
 });
 
@@ -89,6 +88,12 @@ app.get('/manage', cbs, routes.manage);
 app.get('/login', routes.login);
 app.post('/dologin', routes.dologin);
 app.get('/account', cbs, routes.myaccount);
+app.get('/logout', function(req, res, next){
+    
+     req.session.destroy();
+     res.redirect('/index'); 
+     next();
+});
 
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
