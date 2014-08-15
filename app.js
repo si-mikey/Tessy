@@ -82,12 +82,16 @@ app.get('/testcases/:company/:team', cbs, db_ctc, function(req, res){
     res.render('testcases', {title: 'Tessy - Testcases'});    
 });
 
+//app.get('/testcases/:company/:team/:component', cbs, function(req, res){
+//});
+
 
 app.get('/reports', cbs, routes.reports);
 app.get('/manage', cbs, routes.manage);
 app.get('/login', routes.login);
 app.post('/dologin', routes.dologin);
 app.get('/account', cbs, routes.myaccount);
+
 app.get('/logout', function(req, res, next){
     
      req.session.destroy();
