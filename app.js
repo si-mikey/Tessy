@@ -79,7 +79,6 @@ app.get('/testcases/:company/:team', defaultCallbacks, testcase_data, function(r
     res.locals.companies  = req.session.companies;
     res.locals.teams      = req.session.teams;
     res.locals.components = req.session.components; 
-    console.log(res.locals);
     res.render('testcases', {title: 'Tessy - Testcases'});    
 });
 
