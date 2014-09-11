@@ -47,23 +47,24 @@ function setLocals(req, res, next){
 }
 
 //array of callbacks for routes
-var cbs = [requireLoggedIn, setLocals];
+var defaultCallbacks = [requireLoggedIn, setLocals];
 
 //route mappers
 //app.get('/*', requireLoggedIn);
-app.get('/', cbs, routes.home);
-app.get('/index', cbs, routes.home);
-app.get('/home', cbs, routes.home);
+app.get('/', defaultCallbacks, routes.home);
+app.get('/index', defaultCallbacks, routes.home);
+app.get('/home', defaultCallbacks, routes.home);
 
-app.get('/testcases', cbs, testcases.getCompanies, function(req, res){
+var testcase_data = [testcases.getCompanies, testcases.getTeams, testcases.getComponents];
+
+app.get('/testcases', defaultCallbacks, testcase_data[0], function(req, res){
 
     res.locals.companies = req.session.companies;
     res.render('testcases', {title: 'Tessy - Testcases'});
 
 });
 
-var db_ct = [testcases.getCompanies, testcases.getTeams]; 
-app.get('/testcases/:company', cbs, db_ct, function(req, res){
+app.get('/testcases/:company', defaultCallbacks, testcase_data[0], testcase_data[1], function(req, res){
     
     res.locals.company    = req.params.company;
     res.locals.companies  = req.session.companies;
@@ -71,8 +72,7 @@ app.get('/testcases/:company', cbs, db_ct, function(req, res){
     res.render('testcases', {title: 'Tessy - Testcases'});
 });
 
-var db_ctc = [testcases.getCompanies, testcases.getTeams, testcases.getComponents];
-app.get('/testcases/:company/:team', cbs, db_ctc, function(req, res){
+app.get('/testcases/:company/:team', defaultCallbacks, testcase_data, function(req, res){
     
     res.locals.company    = req.params.company;
     res.locals.team       = req.params.team;
@@ -83,12 +83,17 @@ app.get('/testcases/:company/:team', cbs, db_ctc, function(req, res){
     res.render('testcases', {title: 'Tessy - Testcases'});    
 });
 
+app.get('/testcases/:company/:team/:component', defaultCallbacks, function(req, res){
 
-app.get('/reports', cbs, routes.reports);
-app.get('/manage', cbs, routes.manage);
+  res.send(req.session);
+
+});
+
+app.get('/reports', defaultCallbacks, routes.reports);
+app.get('/manage', defaultCallbacks, routes.manage);
 app.get('/login', routes.login);
 app.post('/dologin', routes.dologin);
-app.get('/account', cbs, routes.myaccount);
+app.get('/account', defaultCallbacks, routes.myaccount);
 
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
