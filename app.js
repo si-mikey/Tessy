@@ -82,9 +82,9 @@ app.get('/testcases/:company/:team', defaultCallbacks, testcase_data, function(r
     res.render('testcases', {title: 'Tessy - Testcases'});    
 });
 
-app.get('/testcases/:company/:team/:component', defaultCallbacks, function(req, res){
-
-  res.send(req.session);
+app.get('/testcases/:company/:team/:component', defaultCallbacks, testcase_data, testcases.getScenarios, function(req, res){
+  
+    res.send(req.session); 
 
 });
 
