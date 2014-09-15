@@ -82,8 +82,13 @@ app.get('/testcases/:company/:team', defaultCallbacks, testcase_data, function(r
 });
 
 app.get('/testcases/:company/:team/:component', defaultCallbacks, testcase_data, testcases.getScenarios, function(req, res){
-  
-    res.send(req.session); 
+ 
+    res.locals.company    = req.params.company;
+    res.locals.team       = req.params.team;
+    res.locals.companies  = req.session.companies;
+    res.locals.teams      = req.session.teams;
+    res.locals.components = req.session.components; 
+    res.render('testcases', {title: 'Tessy - Testcases'});
 
 });
 

@@ -30,6 +30,17 @@ div.container-fluid
                 a(href="/testcases/#{company}/#{team}/#{component}")= component 
 
 
+    if(locals.scenarios)
+      div.table-responsive
+        table.table
+          thead
+            tr
+             th TC_ID
+             th TC_SCENARIO
+          tbody
+            tr
+             each test in locals.scenarios
+              td= test 
 
 
 
