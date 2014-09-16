@@ -32,16 +32,16 @@ div.container-fluid
 
     if(locals.scenarios)
       div.table-responsive
-        table.table
+        table.table.table-bordered
           thead
             tr
              th TC_ID
              th TC_SCENARIO
           tbody
-            tr
-             each test in locals.scenarios
-              td= test 
-
+           each scenario in locals.scenarios
+            tr(data-id="#{scenario.tc_id}")
+             td= scenario.tc_id
+             td= scenario.tc_scenario
 
 
 include comps/footer.jade
