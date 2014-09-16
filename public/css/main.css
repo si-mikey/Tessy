@@ -46,7 +46,9 @@ div[role=navigation] .container { margin-left: 0px; }
   margin-left:10px;
 }
 
-
+.table-responsive {
+  margin-top:30px;
+} 
 
 
 
