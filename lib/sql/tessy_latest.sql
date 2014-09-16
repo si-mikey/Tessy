@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.19, for osx10.9 (x86_64)
+-- MySQL dump 10.15  Distrib 10.0.11-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: tessy
 -- ------------------------------------------------------
--- Server version	5.6.19
+-- Server version	10.0.11-MariaDB-1~saucy-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -60,7 +60,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'Shutterstock'),(2,'OffSet'),(3,'SkillFeed'),(4,'BigStock');
+INSERT INTO `company` VALUES (1,'ShutterStock'),(2,'OffSet'),(3,'SkillFeed'),(4,'BigStock');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +75,7 @@ CREATE TABLE `component` (
   `co_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `co_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`co_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `component` (
 
 LOCK TABLES `component` WRITE;
 /*!40000 ALTER TABLE `component` DISABLE KEYS */;
-INSERT INTO `component` VALUES (1,'Login'),(2,'Filters');
+INSERT INTO `component` VALUES (1,'Login'),(2,'Filters'),(3,'Header'),(4,'Footer');
 /*!40000 ALTER TABLE `component` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,10 +104,10 @@ CREATE TABLE `relate` (
   KEY `c_id` (`c_id`),
   KEY `t_id` (`t_id`),
   KEY `co_id` (`co_id`),
-  CONSTRAINT `relate_ibfk_3` FOREIGN KEY (`co_id`) REFERENCES `component` (`co_id`),
   CONSTRAINT `relate_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `company` (`company_id`),
-  CONSTRAINT `relate_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `team` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  CONSTRAINT `relate_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `team` (`team_id`),
+  CONSTRAINT `relate_ibfk_3` FOREIGN KEY (`co_id`) REFERENCES `component` (`co_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +116,7 @@ CREATE TABLE `relate` (
 
 LOCK TABLES `relate` WRITE;
 /*!40000 ALTER TABLE `relate` DISABLE KEYS */;
-INSERT INTO `relate` VALUES (1,1,1,1),(2,1,2,1),(3,1,3,1);
+INSERT INTO `relate` VALUES (1,1,1,1),(2,1,2,1),(3,1,3,1),(5,1,2,2);
 /*!40000 ALTER TABLE `relate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +131,7 @@ CREATE TABLE `team` (
   `team_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `team_name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +140,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'Customer'),(2,'Search'),(3,'Mobile');
+INSERT INTO `team` VALUES (1,'Customer'),(2,'Search'),(3,'Mobile'),(4,'OffSet'),(5,'BigStock');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `testcases` (
   PRIMARY KEY (`tc_id`),
   KEY `tc_relate_id` (`tc_relate_id`),
   CONSTRAINT `testcases_ibfk_1` FOREIGN KEY (`tc_relate_id`) REFERENCES `relate` (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `testcases` (
 
 LOCK TABLES `testcases` WRITE;
 /*!40000 ALTER TABLE `testcases` DISABLE KEYS */;
-INSERT INTO `testcases` VALUES (1,'Verify login functionality','1,2,3,4,5',1),(3,'verify search','1,2',NULL);
+INSERT INTO `testcases` VALUES (1,'Verify login functionality','1,2,3,4,5',1),(3,'verify search','1,2',1),(4,'Verify Negative Login functionality',NULL,1),(5,'Verify Forgot Password',NULL,1),(6,'Verify Display Preferences - Mosaic',NULL,1),(7,'Verify Display Preferences - Large',NULL,1),(8,'Verify Display Preferences - Small',NULL,1),(9,'Verify Display Preferences - Show Preview',NULL,1),(10,'Verify Display Preferences - Safe Search',NULL,1),(11,'Verify Advanced Search - Media Type - All Images',NULL,1),(12,'Verify Advanced Search - Media Type - Photos',NULL,1),(13,'Verify Advanced Search - Media Type - Vectors',NULL,1),(14,'Verify Advanced Search - Media Type - Illustrations',NULL,1);
 /*!40000 ALTER TABLE `testcases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-12 19:40:50
+-- Dump completed on 2014-09-15 23:53:41

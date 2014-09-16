@@ -22,4 +22,6 @@ test:
 clean:
 
 
+db_dump: |
+ mysqldump -uroot -p tessy > lib/sql/tessy_latest.sql
 
