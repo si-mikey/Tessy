@@ -35,8 +35,8 @@ div.container-fluid
         table.table.table-bordered
           thead
             tr
-             th TC_ID
-             th TC_SCENARIO
+             th#tc_id TC_ID
+             th#tc_scenario TC_SCENARIO
           tbody
            each scenario in locals.scenarios
             tr(data-id="#{scenario.tc_id}")

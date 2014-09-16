@@ -32,7 +32,7 @@ div[role=navigation] .container { margin-left: 0px; }
 }
 
 @media (max-width:768px){ 
-  .container .btn-group { 
+  .container .btn-group, #footer { 
     display: none;
   }
 }
@@ -50,6 +50,9 @@ div[role=navigation] .container { margin-left: 0px; }
   margin-top:30px;
 } 
 
+#tc_id {
+  width:10px;
+}
 
 
 
