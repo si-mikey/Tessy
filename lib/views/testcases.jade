@@ -43,6 +43,13 @@ div.container-fluid
              td= scenario.tc_id
              td= scenario.tc_scenario
 
+  script(type='text/javascript').
+     var params = window.location.pathname.split("/").slice(2,5);
+      if( params.length > 0){
+        params.map(function(param, index){ 
+          document.querySelectorAll(".span10 button")[index].innerHTML = param + '<span class="caret"></span>';
+        });
+      }  
 
 include comps/footer.jade
 
