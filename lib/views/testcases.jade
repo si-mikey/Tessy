@@ -32,7 +32,7 @@ div.container-fluid
 
     if(locals.scenarios)
       div.table-responsive
-        table.table.table-bordered
+        table.table.table-bordered#scenariosTable
           thead
             tr
              th#tc_id TC_ID
@@ -46,6 +46,15 @@ div.container-fluid
   script(type='text/javascript').
     //Sets labels on the dropdowns with the selected values ( based on url params )
     tessy.setDropDownText();
+    $("#scenariosTable tbody tr").on('click', function(item) { 
+      
+      var row = item.target.parentNode; 
+      if(row.className == 'active'){
+         row.className = '';
+      }else{
+         row.className = 'active';
+      }
+    });
 
 
 include comps/footer.jade
