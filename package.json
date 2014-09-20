@@ -12,6 +12,7 @@
     "mariasql"    : "*",
     "yamljs"      : "*",
     "bcryptjs"    : "*",
-    "underscore"  : "*"
+    "underscore"  : "*",
+    "validator"  : "*"
   }
 }
