@@ -36,6 +36,12 @@ div[role=navigation] .container { margin-left: 0px; }
     display: none;
   }
 }
+
+@media (max-width:1250px){ 
+  #footer { 
+    display: none;
+  }
+}
  
 .container-fluid .row-fluid {
   margin-top: 55px;
