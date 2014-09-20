@@ -23,9 +23,11 @@ clean:
 
 
 db_load: | 
+ echo "To import .sql file to db"
  mysql -uroot -p tessy < lib/sql/tessy_latest.sql
 
 
 db_dump: |
+ echo "To export db to .sql file"
  mysqldump -uroot -p tessy > lib/sql/tessy_latest.sql
 
