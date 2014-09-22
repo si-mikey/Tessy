@@ -46,16 +46,17 @@ div.container-fluid
   script(type='text/javascript').
     //Sets labels on the dropdowns with the selected values ( based on url params )
     tessy.setDropDownText();
-    $("#scenariosTable tbody tr").on('click', function(item) { 
-      
-      var row = item.target.parentNode; 
-      if(row.className == 'active'){
-         row.className = '';
-      }else{
-         row.className = 'active';
-      }
-    });
 
+    //highlight row on click
+    $("#scenariosTable tbody tr").on("click", function(evt){
+      
+       var row = evt.target.parentNode;
+       if (row.className == 'success'){
+         row.className = '';
+       }else{
+          row.className = 'success';
+       } 
+    });
 
 include comps/footer.jade
 
