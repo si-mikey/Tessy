@@ -39,9 +39,23 @@ div.container-fluid
              th#tc_scenario TC_SCENARIO
           tbody
            each scenario in locals.scenarios
-            tr(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}")
+            tr(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}", data-target=".scenario-modal")
              td= scenario.tc_id
              td= scenario.tc_scenario
+      
+      div.modal.scenario-modal(tabindex="-1", role="dialog")
+        div.modal-dialog
+          div.modal-content 
+            div.modal-header
+              button.close(type="button", data-dismiss="modal")
+                span(aria-hidden="true") &times;
+                span.sr-only close
+              h4.modal-title Modal Title
+            div.modal-body
+              p Test body data
+            div.modal-footer
+              button.btn.btn-default(type="button", data-dismiss="modal") Close
+              button.btn.btn-primary(type="button") Save Changes  
 
   script(type='text/javascript').
     //Sets labels on the dropdowns with the selected values ( based on url params )
@@ -58,6 +72,18 @@ div.container-fluid
        } 
 
     });
+
+
+    //show modal with steps on double click
+    $("#scenariosTable tbody tr").on("dblclick", function(evt){
+
+      var row   = evt.target.parentNode;
+      var rowID = row.dataset.id; 
+      $(".scenario-modal").modal();  
+
+    });
+
+
 
 include comps/footer.jade
 
