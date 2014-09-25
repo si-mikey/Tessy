@@ -44,18 +44,18 @@ div.container-fluid
              td= scenario.tc_scenario
       
       div.modal.scenario-modal(tabindex="-1", role="dialog")
+       form#scenarioSteps(action="/api/steps/updateById", method="POST")
         div.modal-dialog
           div.modal-content 
             div.modal-header
-              button.close(type="button", data-dismiss="modal")
+              button.close.modal-close(type="button")
                 span(aria-hidden="true") &times;
                 span.sr-only close
               h4.modal-title Modal Title
             div.modal-body
-              p Test body data
             div.modal-footer
-              button.btn.btn-default(type="button", data-dismiss="modal") Close
-              button.btn.btn-primary(type="button") Save Changes  
+              button.btn.btn-default.modal-close(type="button") Close
+              button.btn.btn-primary#modalSave(type="button") Save Changes  
 
   script(type='text/javascript').
     //Sets labels on the dropdowns with the selected values ( based on url params )
@@ -74,21 +74,32 @@ div.container-fluid
 
       var row   = evt.target.parentNode;
       var stepsId = row.dataset.steps; 
+      var modalForm = $("#scenarioSteps");
       $.ajax({
          type: "GET",
          url: "/api/steps/getById",
          data: { stepsId : stepsId }
       }).done(function( steps ) {
 
-         
-          
+         steps.forEach(function(step){
+            
+          $("#scenarioSteps .modal-body").append("<input class='steps-input' type='text' value='" + step.st_text  + "' /><br>")    
+             
+         });          
 
       });  
 
-      $(".scenario-modal").modal();  
+      $(".scenario-modal").modal();
+  
     });
 
+    $(".modal-close").on("click", function(evt){
+      
+      $(".scenario-modal").modal("hide"); 
+      $("#scenarioSteps .modal-body").html("");
+    });
 
+    
 
 include comps/footer.jade
 
