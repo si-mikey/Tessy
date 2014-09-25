@@ -73,9 +73,19 @@ div.container-fluid
     $("#scenariosTable tbody tr").on("dblclick", function(evt){
 
       var row   = evt.target.parentNode;
-      var rowID = row.dataset.id; 
-      $(".scenario-modal").modal();  
+      var stepsId = row.dataset.steps; 
+      $.ajax({
+         type: "GET",
+         url: "/api/steps/getById",
+         data: { stepsId : stepsId }
+      }).done(function( steps ) {
 
+         
+          
+
+      });  
+
+      $(".scenario-modal").modal();  
     });
 
 

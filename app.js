@@ -104,6 +104,11 @@ app.get('/logout', function(req, res, next){
      next();
 });
 
+app.get('/api/steps/getById', testcases.getSteps); 
+    
+
+
+
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
