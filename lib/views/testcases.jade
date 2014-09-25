@@ -30,8 +30,33 @@ div.container-fluid
                 a(href="/testcases/#{company}/#{team}/#{component}")= component 
 
 
+    if(locals.scenarios)
+      div.table-responsive
+        table.table.table-bordered#scenariosTable
+          thead
+            tr
+             th#tc_id TC_ID
+             th#tc_scenario TC_SCENARIO
+          tbody
+           each scenario in locals.scenarios
+            tr(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}")
+             td= scenario.tc_id
+             td= scenario.tc_scenario
 
+  script(type='text/javascript').
+    //Sets labels on the dropdowns with the selected values ( based on url params )
+    tessy.setDropDownText();
 
+    //highlight row on click
+    $("#scenariosTable tbody tr").on("click", function(evt){
+      
+       var row = evt.target.parentNode;
+       if (row.className == 'success'){
+         row.className = '';
+       }else{
+          row.className = 'success';
+       } 
+    });
 
 include comps/footer.jade
 
