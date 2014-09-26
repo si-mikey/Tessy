@@ -61,15 +61,15 @@ div[role=navigation] .container { margin-left: 0px; }
 
 .steps-input{
   width: 550px;
-  margin-top: 5px;
-  height:40px;
-  font-weight: bold;
+  height: 30px;
   padding-left: 10px;
 }
 
-
-
-
+.step-row{
+  height: 20px;
+  width: 550px;
+  margin-top: 20px;
+}
 
 
 #footer { 

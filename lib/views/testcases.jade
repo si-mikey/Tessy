@@ -55,7 +55,7 @@ div.container-fluid
             div.modal-body
             div.modal-footer
               button.btn.btn-default.modal-close(type="button") Close
-              button.btn.btn-primary#modalSave(type="button") Save Changes  
+              button.btn.btn-primary#modal-save(type="button") Save Changes  
 
   script(type='text/javascript').
     //Sets labels on the dropdowns with the selected values ( based on url params )
@@ -84,7 +84,8 @@ div.container-fluid
          $(".scenario-modal .modal-title").html(scenarioName);
          steps.forEach(function(step){
             
-          $("#scenarioSteps .modal-body").append("<div class='step-row'><input class='steps-input' name=" + step.st_id + " type='text' value='" + step.st_text  + "' /></div>")    
+          //$("#scenarioSteps .modal-body").append("<div class='step-row'><input class='steps-input' name=" + step.st_id + " type='text' value='" + step.st_text  + "' /></div>")    
+          $("#scenarioSteps .modal-body").append("<div class='step-row' data-id="+ step.st_id + ">" +  step.st_text  + "</div>")    
              
          });          
 
@@ -92,6 +93,32 @@ div.container-fluid
 
       $(".scenario-modal").modal();
   
+    });
+
+    $(".modal-body").on('dblclick', ".step-row",  function(evt){
+   
+        var stepId         = evt.target.dataset.id;
+        var stepText       = evt.target.innerHTML
+        var row            = evt.target;
+        var rowInput       = document.createElement("input");
+        rowInput.name      = stepId;
+        rowInput.value     = stepText;
+        rowInput.className = 'steps-input';
+        row.innerHTML      = '';
+        row.appendChild(rowInput); 
+    })
+
+    $("#modal-save").on('click', function(evt){
+      
+        var formParams = $("#scenarioSteps").serialize();
+        $.ajax({
+          type: "POST",
+          url: "/api/steps/updateById",
+          data: { stepIds : formParams }
+        }).done(function(status){
+  
+           console.log(status);
+        });
     });
 
     $(".modal-close").on("click", function(evt){

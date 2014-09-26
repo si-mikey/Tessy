@@ -1,8 +1,8 @@
-var express = require('express');
-var http    = require('http');
-var path    = require('path');
-var yaml    = require('yamljs');
-
+var express   = require('express');
+var http      = require('http');
+var path      = require('path');
+var yaml      = require('yamljs');
+var bodyParser = require('body-parser');
 var routes    = require('./lib/routes');
 var testcases = require('./lib/routes/testcases.js');
 var app = express();
@@ -18,7 +18,8 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 //app.use(express.bodyParser());
-//app.use(express.methodOverride());
+app.use(bodyParser());
+app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -104,9 +105,14 @@ app.get('/logout', function(req, res, next){
      next();
 });
 
-app.get('/api/steps/getById', testcases.getSteps); 
-    
 
+//API ROUTES
+app.get('/api/steps/getById', testcases.getSteps); 
+app.post('/api/steps/updateById', function(req, res, next){
+    console.log(req.body);
+    next();
+}); 
+    
 
 
 //start the server
