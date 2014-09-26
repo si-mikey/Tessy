@@ -40,8 +40,8 @@ div.container-fluid
           tbody
            each scenario in locals.scenarios
             tr(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}", data-target=".scenario-modal")
-             td= scenario.tc_id
-             td= scenario.tc_scenario
+             td.scenario-id= scenario.tc_id
+             td.scenario-name= scenario.tc_scenario
       
       div.modal.scenario-modal(tabindex="-1", role="dialog")
        form#scenarioSteps(action="/api/steps/updateById", method="POST")
@@ -72,18 +72,19 @@ div.container-fluid
     //show modal with steps on double click
     $("#scenariosTable tbody tr").on("dblclick", function(evt){
 
-      var row   = evt.target.parentNode;
-      var stepsId = row.dataset.steps; 
-      var modalForm = $("#scenarioSteps");
+      var row          = evt.target.parentNode;
+      var scenarioName = row.children[1].innerHTML;
+      var stepsId      = row.dataset.steps;
       $.ajax({
          type: "GET",
          url: "/api/steps/getById",
          data: { stepsId : stepsId }
       }).done(function( steps ) {
-
+        
+         $(".scenario-modal .modal-title").html(scenarioName);
          steps.forEach(function(step){
             
-          $("#scenarioSteps .modal-body").append("<input class='steps-input' type='text' value='" + step.st_text  + "' /><br>")    
+          $("#scenarioSteps .modal-body").append("<div class='step-row'><input class='steps-input' name=" + step.st_id + " type='text' value='" + step.st_text  + "' /></div>")    
              
          });          
 
@@ -94,12 +95,18 @@ div.container-fluid
     });
 
     $(".modal-close").on("click", function(evt){
-      
       $(".scenario-modal").modal("hide"); 
       $("#scenarioSteps .modal-body").html("");
     });
 
+    $(".scenario-modal").on("keyup", function(evt){
+      if(evt.keyCode == 27){ 
+        $(".scenario-modal").modal("hide");
+        $("#scenarioSteps .modal-body").html(""); 
+      }
+    });
     
+   
 
 include comps/footer.jade
 
