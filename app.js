@@ -15,11 +15,9 @@ app.use(express.favicon());
 //app.use(express.cookieParser());
 app.use(express.session({secret: process.env.SECRET_SESS_KEY}));
 app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-//app.use(express.bodyParser());
-app.use(bodyParser());
-app.use(express.methodOverride());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+//app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -107,11 +105,13 @@ app.get('/logout', function(req, res, next){
 
 
 //API ROUTES
+app.get('/test', function(req, res, next){
+  console.log('testing');
+  next();
+});
+
 app.get('/api/steps/getById', testcases.getSteps); 
-app.post('/api/steps/updateById', function(req, res, next){
-    console.log(req.body);
-    next();
-}); 
+
     
 
 

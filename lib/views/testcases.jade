@@ -44,7 +44,7 @@ div.container-fluid
              td.scenario-name= scenario.tc_scenario
       
       div.modal.scenario-modal(tabindex="-1", role="dialog")
-       form#scenarioSteps(action="/api/steps/updateById", method="POST")
+       form#scenarioSteps
         div.modal-dialog
           div.modal-content 
             div.modal-header
@@ -84,7 +84,6 @@ div.container-fluid
          $(".scenario-modal .modal-title").html(scenarioName);
          steps.forEach(function(step){
             
-          //$("#scenarioSteps .modal-body").append("<div class='step-row'><input class='steps-input' name=" + step.st_id + " type='text' value='" + step.st_text  + "' /></div>")    
           $("#scenarioSteps .modal-body").append("<div class='step-row' data-id="+ step.st_id + ">" +  step.st_text  + "</div>")    
              
          });          
@@ -112,12 +111,12 @@ div.container-fluid
       
         var formParams = $("#scenarioSteps").serialize();
         $.ajax({
-          type: "POST",
-          url: "/api/steps/updateById",
+          type: "GET",
+          url: "/test",
           data: { stepIds : formParams }
-        }).done(function(status){
+        }).done(function(msg){
   
-           console.log(status);
+           console.log(msg);
         });
     });
 
