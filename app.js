@@ -111,6 +111,7 @@ app.get('/test', function(req, res, next){
 });
 
 app.get('/api/steps/getById', testcases.getSteps); 
+//app.post('/api/steps/updateById', testcases.getSteps); 
 
     
 
