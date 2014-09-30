@@ -105,17 +105,10 @@ app.get('/logout', function(req, res, next){
 
 
 //API ROUTES
-app.get('/test', function(req, res, next){
-  console.log('testing');
-  next();
-});
-
 app.get('/api/steps/getById', testcases.getSteps); 
-//app.post('/api/steps/updateById', testcases.getSteps); 
+app.post('/api/steps/updateById', testcases.updateById); 
 
     
-
-
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
