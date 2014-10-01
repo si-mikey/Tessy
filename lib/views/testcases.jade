@@ -59,38 +59,20 @@ div.container-fluid
 
   script(type='text/javascript').
     //Sets labels on the dropdowns with the selected values ( based on url params )
-    tessy.setDropDownText();
+    tessy.helper.setDropDownText();
 
     //highlight row on click
-    $("#scenariosTable tbody tr").on("click", function(evt){
-      
-       var row = evt.target.parentNode;
-       (row.className == 'success') ? row.className = '' : row.className = 'success';
-    });
-
+    tessy.helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
+    
 
     //show modal with steps on double click
     $("#scenariosTable tbody tr").on("dblclick", function(evt){
 
       var row          = evt.target.parentNode;
       var scenarioName = row.children[1].innerHTML;
-      var stepsId      = row.dataset.steps;
-      $.ajax({
-         type: "GET",
-         url: "/api/steps/getById",
-         data: { stepsId : stepsId }
-      }).done(function( steps ) {
-        
-         $(".scenario-modal .modal-title").html(scenarioName);
-         steps.forEach(function(step){
-            
-          $("#scenarioSteps .modal-body").append("<div class='step-row' data-id="+ step.st_id + ">" +  step.st_text  + "</div>")    
-             
-         });          
-
-      });  
-
-      $(".scenario-modal").modal();
+      var stepIds      = row.dataset.steps;
+      tessy.testCases.loadSteps(stepIds); 
+      $(".scenario-modal").modal('show');
   
     });
 
@@ -114,12 +96,12 @@ div.container-fluid
           url: "/api/steps/updateById",
           data: { steps: $("#scenarioSteps").serializeArray() }
         }).done(function(status){
-
-          console.log(status);
-        }).fail(function(err){
-            
-           console.log(err);
-        });
+                
+          if(status == 'ok'){ 
+          
+            $(".scenario-modal").modal('hide');  
+          }
+        })
     });
 
     $(".modal-close").on("click", function(evt){
