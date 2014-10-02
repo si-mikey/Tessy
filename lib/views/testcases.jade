@@ -78,7 +78,7 @@ div.container-fluid
        steps.map(function(step){
          modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
         }); 
-        $(".scenario-modal .modal-body").append(modalData);
+        tessy.modals.appendTo('.scenario-modal .modal-body', modalData);
       }); 
       $(".scenario-modal").modal('show');
     });

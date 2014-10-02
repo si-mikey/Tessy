@@ -56,14 +56,12 @@ tessy.modals = {
 
   setModalTitle : function(selector, newTitle){
     
-   //$(".scenario-modal .modal-title").html(scenarioName);
-   $(selector).html(newTitle);
-   
+    $(selector).html(newTitle);
   },
 
-  appendToBody  : function(selector, data){
-
-
+  appendTo  : function(selector, data){
+  
+    $(selector).append(data);  
   }
 
 }
