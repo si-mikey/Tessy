@@ -71,7 +71,8 @@ div.container-fluid
       var row          = evt.target.parentNode;
       var scenarioName = row.children[1].innerHTML;
       var stepIds      = row.dataset.steps;
-      tessy.testCases.loadSteps(stepIds); 
+      
+      console.log(tessy.testCases.getSteps(stepIds));
       $(".scenario-modal").modal('show');
   
     });
@@ -98,8 +99,9 @@ div.container-fluid
         }).done(function(status){
                 
           if(status == 'ok'){ 
-          
-            $(".scenario-modal").modal('hide');  
+         
+            $(".scenario-modal").modal('hide');
+            i
           }
         })
     });

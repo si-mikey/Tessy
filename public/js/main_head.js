@@ -28,7 +28,7 @@ tessy.helper = {
    $(tblSelector).on("click", function(evt){
      var row = evt.target.parentNode;
      (row.className == highlightClass) ? row.className = '' : row.className = highlightClass;
-    });
+   });
 
   } 
 
@@ -36,28 +36,39 @@ tessy.helper = {
 
 tessy.testCases = {
 
-  loadSteps : function(stepIds){
+  getSteps : function(stepIds){
+      
+   return $.ajax({
+           type: "GET",
+           url: "/api/steps/getById",
+           data: { stepIds : stepIds }
+          //steps.forEach(function(step){
+              
+          //  $("#scenarioSteps .modal-body").append("<div class='step-row' data-id="+ step.st_id + ">" +  step.st_text  + "</div>")    
+                        
+          // });          
 
-      $.ajax({
-         type: "GET",
-         url: "/api/steps/getById",
-         data: { stepsId : stepIds }
-      }).done(function( steps ) {
-        
-         $(".scenario-modal .modal-title").html(scenarioName);
-
-         steps.forEach(function(step){
-            
-         $("#scenarioSteps .modal-body").append("<div class='step-row' data-id="+ step.st_id + ">" +  step.st_text  + "</div>")    
-             
-         });          
-
-      });  
+        });  
 
   }
 
+}
 
-  
+tessy.modals = {
 
+  setModalTitle : function(selector, newTitle){
+    
+   //$(".scenario-modal .modal-title").html(scenarioName);
+   $(selector).html(newTitle);
+   
+  },
+
+
+  appendToBody  : function(selector, promise){
+
+
+
+
+  }
 
 }
