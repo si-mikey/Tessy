@@ -42,13 +42,11 @@ tessy.testCases = {
            type: "GET",
            url: "/api/steps/getById",
            data: { stepIds : stepIds }
-          //steps.forEach(function(step){
-              
-          //  $("#scenarioSteps .modal-body").append("<div class='step-row' data-id="+ step.st_id + ">" +  step.st_text  + "</div>")    
-                        
-          // });          
-
         });  
+  },
+
+  getScenarios  : function(scenarioIds){
+
 
   }
 
@@ -63,10 +61,7 @@ tessy.modals = {
    
   },
 
-
-  appendToBody  : function(selector, promise){
-
-
+  appendToBody  : function(selector, data){
 
 
   }

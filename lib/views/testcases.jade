@@ -71,10 +71,16 @@ div.container-fluid
       var row          = evt.target.parentNode;
       var scenarioName = row.children[1].innerHTML;
       var stepIds      = row.dataset.steps;
-      
-      console.log(tessy.testCases.getSteps(stepIds));
+      var modalData    = '';
+      var stepsPromise = tessy.testCases.getSteps(stepIds);
+      stepsPromise.success(function(steps){ 
+       tessy.modals.setModalTitle(".scenario-modal .modal-title", scenarioName);
+       steps.map(function(step){
+         modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
+        }); 
+        $(".scenario-modal .modal-body").append(modalData);
+      }); 
       $(".scenario-modal").modal('show');
-  
     });
 
     $(".modal-body").on('dblclick', ".step-row",  function(evt){
@@ -101,7 +107,6 @@ div.container-fluid
           if(status == 'ok'){ 
          
             $(".scenario-modal").modal('hide');
-            i
           }
         })
     });
