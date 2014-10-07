@@ -1,6 +1,6 @@
 var tessy = window.tessy || {}; 
 
-tessy = {
+tessy.helper = {
 
   getUrlParam : function(name){
 
@@ -21,6 +21,47 @@ tessy = {
       });
     } 
 
-  }
+  },
+
+  highlightTblRow  : function(tblSelector, highlightClass){
+
+   $(tblSelector).on("click", function(evt){
+     var row = evt.target.parentNode;
+     (row.className == highlightClass) ? row.className = '' : row.className = highlightClass;
+   });
+
+  } 
 
 };
+
+tessy.testCases = {
+
+  getSteps : function(stepIds){
+      
+   return $.ajax({
+           type: "GET",
+           url: "/api/steps/getById",
+           data: { stepIds : stepIds }
+        });  
+  },
+
+  getScenarios  : function(scenarioIds){
+
+
+  }
+
+}
+
+tessy.modals = {
+
+  setModalTitle : function(selector, newTitle){
+    
+    $(selector).html(newTitle);
+  },
+
+  appendTo  : function(selector, data){
+  
+    $(selector).append(data);  
+  }
+
+}

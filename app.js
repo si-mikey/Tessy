@@ -1,8 +1,8 @@
-var express = require('express');
-var http    = require('http');
-var path    = require('path');
-var yaml    = require('yamljs');
-
+var express   = require('express');
+var http      = require('http');
+var path      = require('path');
+var yaml      = require('yamljs');
+var bodyParser = require('body-parser');
 var routes    = require('./lib/routes');
 var testcases = require('./lib/routes/testcases.js');
 var app = express();
@@ -15,9 +15,8 @@ app.use(express.favicon());
 //app.use(express.cookieParser());
 app.use(express.session({secret: process.env.SECRET_SESS_KEY}));
 app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-//app.use(express.bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 //app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -104,6 +103,12 @@ app.get('/logout', function(req, res, next){
      next();
 });
 
+
+//API ROUTES
+app.get('/api/steps/getById', testcases.getSteps); 
+app.post('/api/steps/updateById', testcases.updateById); 
+
+    
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
