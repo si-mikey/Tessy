@@ -1,15 +1,6 @@
-var tessy = window.tessy || {}; 
+var Tessy = window.Tessy || {}; 
 
-tessy.helper = {
-
-  getUrlParam : function(name){
-
-     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-     results = regex.exec(location.search);
-     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); 
-
-   },
+var Helper =  {
 
   setDropDownText : function(){
 
@@ -34,7 +25,8 @@ tessy.helper = {
 
 };
 
-tessy.testCases = {
+
+var TestCases = Backbone.Model.extend({
 
   getSteps : function(stepIds){
       
@@ -43,25 +35,30 @@ tessy.testCases = {
            url: "/api/steps/getById",
            data: { stepIds : stepIds }
         });  
-  },
-
-  getScenarios  : function(scenarioIds){
-
-
   }
 
-}
+});
 
-tessy.modals = {
 
-  setModalTitle : function(selector, newTitle){
-    
-    $(selector).html(newTitle);
-  },
-
-  appendTo  : function(selector, data){
+var Modal = Backbone.Model.extend({
   
-    $(selector).append(data);  
-  }
+  initialize: function(modal){
+    
+    this.modal = modal;
+  },
 
-}
+  setTitle: function(newTitle){
+    
+    $(this.modal + ' .modal-title').html(newTitle);
+  },
+
+  setBody: function(data){
+  
+    $(this.modal + ' .modal-body' ).html(data);  
+  },
+
+  setFooter: fuction(data){
+
+    $(this.modal + ' .modal-footer').html(data);
+  }
+});

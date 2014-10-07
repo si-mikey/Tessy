@@ -59,10 +59,10 @@ div.container-fluid
 
   script(type='text/javascript').
     //Sets labels on the dropdowns with the selected values ( based on url params )
-    tessy.helper.setDropDownText();
+    Helper.setDropDownText();
 
     //highlight row on click
-    tessy.helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
+    Helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
     
 
     //show modal with steps on double click
@@ -72,13 +72,13 @@ div.container-fluid
       var scenarioName = row.children[1].innerHTML;
       var stepIds      = row.dataset.steps;
       var modalData    = '';
-      var stepsPromise = tessy.testCases.getSteps(stepIds);
+      var stepsPromise = Tessy.testCases.getSteps(stepIds);
       stepsPromise.success(function(steps){ 
-       tessy.modals.setModalTitle(".scenario-modal .modal-title", scenarioName);
+       Tessy.modals.setModalTitle(".scenario-modal .modal-title", scenarioName);
        steps.map(function(step){
          modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
         }); 
-        tessy.modals.appendTo('.scenario-modal .modal-body', modalData);
+        Tessy.modals.appendTo('.scenario-modal .modal-body', modalData);
       }); 
       $(".scenario-modal").modal('show');
     });
