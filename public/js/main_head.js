@@ -41,24 +41,35 @@ var TestCases = Backbone.Model.extend({
 
 
 var Modal = Backbone.Model.extend({
-  
-  initialize: function(modal){
-    
-    this.modal = modal;
+
+  initialize: function(title, content){
+   this.setTitle(title);
+   this.setBody(content);
   },
 
   setTitle: function(newTitle){
-    
-    $(this.modal + ' .modal-title').html(newTitle);
+    $(".scenario-modal .modal-title").html(newTitle);
   },
 
-  setBody: function(data){
+  setBody: function(content){
+    $(".scenario-modal .modal-body").html(content);
+  },
   
-    $(this.modal + ' .modal-body' ).html(data);  
+  editStep: function(e){
+  
+  },
+  
+  addStep: function(){
+
+  },
+  
+  setFooter: function(data){
+   $(".scenario-modal .modal-footer"); 
   },
 
-  setFooter: fuction(data){
-
-    $(this.modal + ' .modal-footer').html(data);
-  }
+  toggle: function(toggle){
+   $(".scenario-modal").modal(toggle);
+  } 
+  
 });
+

@@ -72,15 +72,15 @@ div.container-fluid
       var scenarioName = row.children[1].innerHTML;
       var stepIds      = row.dataset.steps;
       var modalData    = '';
-      var stepsPromise = Tessy.testCases.getSteps(stepIds);
+      var testCase     = new TestCases();
+      var stepsPromise = testCase.getSteps(stepIds);
       stepsPromise.success(function(steps){ 
-       Tessy.modals.setModalTitle(".scenario-modal .modal-title", scenarioName);
        steps.map(function(step){
          modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
         }); 
-        Tessy.modals.appendTo('.scenario-modal .modal-body', modalData);
+       var modal = new Modal(scenarioName, modalData);
+       modal.toggle('show'); 
       }); 
-      $(".scenario-modal").modal('show');
     });
 
     $(".modal-body").on('dblclick', ".step-row",  function(evt){
