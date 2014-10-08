@@ -51,7 +51,7 @@ div.container-fluid
               button.close.modal-close(type="button")
                 span(aria-hidden="true") &times;
                 span.sr-only close
-              h4.modal-title Modal Title
+              h4.modal-title 
             div.modal-body
             div.modal-footer
               button.btn.btn-default.modal-close(type="button") Close
@@ -63,7 +63,12 @@ div.container-fluid
 
     //highlight row on click
     Helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
-    
+   
+    //object to handle the modal 
+    var modal = new Modal('.scenario-modal');
+
+    //object to get and update testcases
+    var testCase = new TestCases();
 
     //show modal with steps on double click
     $("#scenariosTable tbody tr").on("dblclick", function(evt){
@@ -72,54 +77,40 @@ div.container-fluid
       var scenarioName = row.children[1].innerHTML;
       var stepIds      = row.dataset.steps;
       var modalData    = '';
-      var testCase     = new TestCases();
       var stepsPromise = testCase.getSteps(stepIds);
       stepsPromise.success(function(steps){ 
        steps.map(function(step){
          modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
         }); 
-       var modal = new Modal(scenarioName, modalData);
+       modal.setTitle(scenarioName);
+       modal.setBody(modalData);
        modal.toggle('show'); 
       }); 
     });
 
     $(".modal-body").on('dblclick', ".step-row",  function(evt){
-   
-        var stepId         = evt.target.dataset.id;
-        var stepText       = evt.target.innerHTML
-        var row            = evt.target;
-        var rowInput       = document.createElement("input");
-        rowInput.name      = stepId;
-        rowInput.value     = stepText;
-        rowInput.className = 'steps-input';
-        row.innerHTML      = '';
-        row.appendChild(rowInput); 
+      modal.editStep(evt); 
     })
 
     $("#modal-save").on('click', function(evt){
-      
-        $.ajax({
-          type: "POST",
-          url: "/api/steps/updateById",
-          data: { steps: $("#scenarioSteps").serializeArray() }
-        }).done(function(status){
-                
-          if(status == 'ok'){ 
-         
-            $(".scenario-modal").modal('hide');
-          }
-        })
+      var steps = $("#scenarioSteps").serializeArray() 
+      if(steps.length > 0){ 
+        var savePromise = testCase.saveSteps(steps); 
+        savePromise.success(function(status){
+         if(status === 'ok') {modal.toggle('hide'); } 
+        });
+      }else{
+        modal.toggle('hide');
+      }
     });
 
     $(".modal-close").on("click", function(evt){
-      $(".scenario-modal").modal("hide"); 
-      $("#scenarioSteps .modal-body").html("");
+      modal.toggle('hide'); 
     });
 
     $(".scenario-modal").on("keyup", function(evt){
       if(evt.keyCode == 27){ 
-        $(".scenario-modal").modal("hide");
-        $("#scenarioSteps .modal-body").html(""); 
+        modal.toggle('hide'); 
       }
     });
     

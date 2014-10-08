@@ -35,28 +35,43 @@ var TestCases = Backbone.Model.extend({
            url: "/api/steps/getById",
            data: { stepIds : stepIds }
         });  
-  }
+  },
 
+  saveSteps : function(steps){
+
+   return $.ajax({
+            type: "POST",
+            url: "/api/steps/updateById",
+            data: { steps: steps }
+          });
+  }
 });
 
 
 var Modal = Backbone.Model.extend({
 
-  initialize: function(title, content){
-   this.setTitle(title);
-   this.setBody(content);
+  initialize: function(modal){
+   this.modal = modal;
   },
 
   setTitle: function(newTitle){
-    $(".scenario-modal .modal-title").html(newTitle);
+    $(this.modal + " .modal-title").html(newTitle);
   },
 
   setBody: function(content){
-    $(".scenario-modal .modal-body").html(content);
+    $(this.modal + " .modal-body").html(content);
   },
   
-  editStep: function(e){
-  
+  editStep: function(evt){
+    var stepId         = evt.target.dataset.id;
+    var stepText       = evt.target.innerHTML
+    var row            = evt.target;
+    var rowInput       = document.createElement("input");
+    rowInput.name      = stepId;
+    rowInput.value     = stepText;
+    rowInput.className = 'steps-input';
+    row.innerHTML      = '';
+    row.appendChild(rowInput); 
   },
   
   addStep: function(){
@@ -64,11 +79,17 @@ var Modal = Backbone.Model.extend({
   },
   
   setFooter: function(data){
-   $(".scenario-modal .modal-footer"); 
+   $(this.modal + " .modal-footer"); 
   },
 
   toggle: function(toggle){
-   $(".scenario-modal").modal(toggle);
+
+    if(toggle === 'hide'){ 
+     this.setTitle('');  
+     this.setBody('');  
+    } 
+
+    $(this.modal).modal(toggle);
   } 
   
 });
