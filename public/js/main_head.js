@@ -61,6 +61,10 @@ var Modal = Backbone.Model.extend({
   setStatus: function(type, msg){
     $(this.modal + " .modal-body-status").addClass('alert-'+type).html(msg);
   },
+  
+  clearStatus: function(){
+    $(this.modal + " .modal-body-status").removeClass('alert-danger').removeClass('alert-success').html('');
+  },
 
   setBody: function(content){
     $(this.modal + " .modal-body").html(content);
@@ -86,15 +90,21 @@ var Modal = Backbone.Model.extend({
    $(this.modal + " .modal-footer"); 
   },
 
-  toggle: function(toggle){
+  toggle: function(toggle, delay){
+  
+     var delay = delay || 0;
+     if(toggle === 'hide'){ 
+      var that = this;
+      window.setTimeout(function(){ 
+        $(that.modal).modal(toggle)
+        that.setTitle('');  
+        that.setBody('');
+        that.clearStatus();
+      }, delay);
 
-    if(toggle === 'hide'){ 
-     this.setTitle('');  
-     this.setBody('');  
-    } 
-
-    $(this.modal).modal(toggle);
-  } 
+     }else{
+        $(this.modal).modal(toggle); 
+  }  } 
   
 });
 

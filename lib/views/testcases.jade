@@ -99,7 +99,7 @@ div.container-fluid
         savePromise.success(function(status){
          if(status === 'ok') { 
           modal.setStatus('success', 'Successfully saved your changes.');
-          modal.toggle('hide'); 
+          modal.toggle('hide', 2000); 
          }else{
           modal.setStatus('danger', 'Something bad happened saving');
          } 
