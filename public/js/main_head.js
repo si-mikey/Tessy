@@ -58,6 +58,10 @@ var Modal = Backbone.Model.extend({
     $(this.modal + " .modal-title").html(newTitle);
   },
 
+  setStatus: function(type, msg){
+    $(this.modal + " .modal-body-status").addClass('alert-'+type).html(msg);
+  },
+
   setBody: function(content){
     $(this.modal + " .modal-body").html(content);
   },

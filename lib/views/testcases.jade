@@ -52,6 +52,7 @@ div.container-fluid
                 span(aria-hidden="true") &times;
                 span.sr-only close
               h4.modal-title 
+            div.modal-body-status.alert(role="alert")
             div.modal-body
             div.modal-footer
               button.btn.btn-default.modal-close(type="button") Close
@@ -72,7 +73,6 @@ div.container-fluid
 
     //show modal with steps on double click
     $("#scenariosTable tbody tr").on("dblclick", function(evt){
-
       var row          = evt.target.parentNode;
       var scenarioName = row.children[1].innerHTML;
       var stepIds      = row.dataset.steps;
@@ -94,10 +94,15 @@ div.container-fluid
 
     $("#modal-save").on('click', function(evt){
       var steps = $("#scenarioSteps").serializeArray() 
-      if(steps.length > 0){ 
+      if(steps.length){ 
         var savePromise = testCase.saveSteps(steps); 
         savePromise.success(function(status){
-         if(status === 'ok') {modal.toggle('hide'); } 
+         if(status === 'ok') { 
+          modal.setStatus('success', 'Successfully saved your changes.');
+          modal.toggle('hide'); 
+         }else{
+          modal.setStatus('danger', 'Something bad happened saving');
+         } 
         });
       }else{
         modal.toggle('hide');
