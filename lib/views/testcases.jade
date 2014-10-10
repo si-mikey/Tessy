@@ -39,7 +39,7 @@ div.container-fluid
              th#tc_scenario TC_SCENARIO
           tbody
            each scenario in locals.scenarios
-            tr(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}", data-target=".scenario-modal")
+            tr.scenario-row(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}", data-target=".scenario-modal")
              td.scenario-id= scenario.tc_id
              td.scenario-name= scenario.tc_scenario
       
@@ -77,7 +77,7 @@ div.container-fluid
       var testCase = new TestCases();
 
       //show modal with steps on double click
-      $("#scenariosTable tbody tr").on("dblclick", function(evt){
+      $("#scenariosTable tbody").on("dblclick", ".scenario-row", function(evt){
         var row          = evt.target.parentNode;
         var scenarioName = row.children[1].innerHTML;
         var stepIds      = row.dataset.steps;
