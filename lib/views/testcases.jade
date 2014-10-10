@@ -59,66 +59,71 @@ div.container-fluid
               button.btn.btn-primary#modal-save(type="button") Save Changes  
 
   script(type='text/javascript').
-    //Sets labels on the dropdowns with the selected values ( based on url params )
-    Helper.setDropDownText();
+  
+   $(document).ready(function(){
+      //Sets labels on the dropdowns with the selected values ( based on url params )
+      Helper.setDropDownText();
 
-    //highlight row on click
-    Helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
-   
-    //object to handle the modal 
-    var modal = new Modal('.scenario-modal');
+      //highlight row on click
+      Helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
+  
+      //DataTable initialize
+      $("#scenariosTable").DataTable();    
+  
+      //object to handle the modal 
+      var modal = new Modal('.scenario-modal');
 
-    //object to get and update testcases
-    var testCase = new TestCases();
+      //object to get and update testcases
+      var testCase = new TestCases();
 
-    //show modal with steps on double click
-    $("#scenariosTable tbody tr").on("dblclick", function(evt){
-      var row          = evt.target.parentNode;
-      var scenarioName = row.children[1].innerHTML;
-      var stepIds      = row.dataset.steps;
-      var modalData    = '';
-      var stepsPromise = testCase.getSteps(stepIds);
-      stepsPromise.success(function(steps){ 
-       steps.map(function(step){
-         modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
+      //show modal with steps on double click
+      $("#scenariosTable tbody tr").on("dblclick", function(evt){
+        var row          = evt.target.parentNode;
+        var scenarioName = row.children[1].innerHTML;
+        var stepIds      = row.dataset.steps;
+        var modalData    = '';
+        var stepsPromise = testCase.getSteps(stepIds);
+        stepsPromise.success(function(steps){ 
+         steps.map(function(step){
+           modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
+          }); 
+         modal.setTitle(scenarioName);
+         modal.setBody(modalData);
+         modal.toggle('show'); 
         }); 
-       modal.setTitle(scenarioName);
-       modal.setBody(modalData);
-       modal.toggle('show'); 
-      }); 
-    });
+      });
 
-    $(".modal-body").on('dblclick', ".step-row",  function(evt){
-      modal.editStep(evt); 
-    })
+      $(".modal-body").on('dblclick', ".step-row",  function(evt){
+        modal.editStep(evt); 
+      })
 
-    $("#modal-save").on('click', function(evt){
-      var steps = $("#scenarioSteps").serializeArray() 
-      if(steps.length){ 
-        var savePromise = testCase.saveSteps(steps); 
-        savePromise.success(function(status){
-         if(status === 'ok') { 
-          modal.setStatus('success', 'Successfully saved your changes.');
-          modal.toggle('hide', 2000); 
-         }else{
-          modal.setStatus('danger', 'Something bad happened saving');
-         } 
-        });
-      }else{
-        modal.toggle('hide');
-      }
-    });
+      $("#modal-save").on('click', function(evt){
+        var steps = $("#scenarioSteps").serializeArray() 
+        if(steps.length){ 
+          var savePromise = testCase.saveSteps(steps); 
+          savePromise.success(function(status){
+           if(status === 'ok') { 
+            modal.setStatus('success', 'Successfully saved your changes.');
+            modal.toggle('hide', 2000); 
+           }else{
+            modal.setStatus('danger', 'Something bad happened while saving.');
+           } 
+          });
+        }else{
+          modal.toggle('hide');
+        }
+      });
 
-    $(".modal-close").on("click", function(evt){
-      modal.toggle('hide'); 
-    });
-
-    $(".scenario-modal").on("keyup", function(evt){
-      if(evt.keyCode == 27){ 
+      $(".modal-close").on("click", function(evt){
         modal.toggle('hide'); 
-      }
-    });
-    
+      });
+
+      $(".scenario-modal").on("keyup", function(evt){
+        if(evt.keyCode == 27){ 
+          modal.toggle('hide'); 
+        }
+      });
+   });
    
 
 include comps/footer.jade
