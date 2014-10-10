@@ -18,7 +18,7 @@ var Helper =  {
 
    $(tblSelector).on("click", function(evt){
      var row = evt.target.parentNode;
-     if(row.className == highlightClass){
+     if($(row).hasClass(highlightClass)){
 
       $(row).removeClass(highlightClass)
     }else{
