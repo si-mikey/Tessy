@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.11-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.19, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: tessy
 -- ------------------------------------------------------
--- Server version	10.0.11-MariaDB-1~saucy-log
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -181,7 +181,6 @@ DROP TABLE IF EXISTS `testcases_steps`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `testcases_steps` (
   `st_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `st_type` varchar(20) DEFAULT NULL,
   `st_text` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`st_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
@@ -193,7 +192,7 @@ CREATE TABLE `testcases_steps` (
 
 LOCK TABLES `testcases_steps` WRITE;
 /*!40000 ALTER TABLE `testcases_steps` DISABLE KEYS */;
-INSERT INTO `testcases_steps` VALUES (1,'given','I load the Login page'),(2,'when','I enter valid credentials'),(3,'and','I submit the form'),(4,'then','I should be logged in'),(5,'And','I see username in the header');
+INSERT INTO `testcases_steps` VALUES (1,'Given I load the Login page'),(2,'When I enter valid credentials'),(3,'And I click on sign-in'),(4,'Then I should be logged-in'),(5,'And I see username in the header');
 /*!40000 ALTER TABLE `testcases_steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,4 +233,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-15 23:53:41
+-- Dump completed on 2014-09-25 22:46:53

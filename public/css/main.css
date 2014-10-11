@@ -47,7 +47,6 @@ div[role=navigation] .container { margin-left: 0px; }
   margin-top: 55px;
 }
 
-
 .row-fluid .btn-group {
   margin-left:10px;
 }
@@ -61,14 +60,29 @@ div[role=navigation] .container { margin-left: 0px; }
 }
 
 
+/* Modal Styles */
+.steps-input{
+  width: 550px;
+  height: 30px;
+  padding-left: 10px;
+}
 
+.step-row{
+  height: 20px;
+  width: 550px;
+  margin-top: 20px;
+}
 
+.modal-body {
+  padding: 0px 20px 20px 20px;
+}
 
+.modal-body-status{
+  font-weight: bold;
+  text-align: center;
+}
 
-
-
-
-
+/* Modal Styles */
 
 #footer { 
   position: absolute;

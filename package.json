@@ -13,6 +13,7 @@
     "yamljs"      : "*",
     "bcryptjs"    : "*",
     "underscore"  : "*",
-    "validator"  : "*"
+    "validator"  : "*",
+    "body-parser"  : "*"
   }
 }
