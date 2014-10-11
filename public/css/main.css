@@ -78,6 +78,7 @@ div[role=navigation] .container { margin-left: 0px; }
 }
 
 .modal-body-status{
+  font-weight: bold;
   text-align: center;
 }
 

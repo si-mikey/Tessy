@@ -1,4 +1,5 @@
-var Tessy = window.Tessy || {}; 
+var Tessy  = window.Tessy  || {}; 
+var Helper = window.Helper || {}; 
 
 var Helper =  {
 
