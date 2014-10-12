@@ -84,7 +84,7 @@ var Modal = Backbone.Model.extend({
     var rowInput       = document.createElement("input");
     rowInput.name      = stepId;
     rowInput.value     = stepText;
-    rowInput.className = 'steps-input';
+    rowInput.className = 'steps-input form-control';
     row.innerHTML      = '';
     row.appendChild(rowInput); 
   },
