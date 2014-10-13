@@ -31,6 +31,17 @@ div[role=navigation] .container { margin-left: 0px; }
   right: 0;
 }
 
+
+/*DataTable overrides */
+
+#scenariosTable_filter input[type=search]{
+  width: 300px;  
+}
+
+/*DataTable overrides */
+
+
+
 @media (max-width:768px){ 
   .container .btn-group, #footer { 
     display: none;
@@ -38,6 +49,12 @@ div[role=navigation] .container { margin-left: 0px; }
 }
 
 @media (max-width:1250px){ 
+  #footer { 
+    display: none;
+  }
+}
+ 
+@media (max-height:680px){ 
   #footer { 
     display: none;
   }

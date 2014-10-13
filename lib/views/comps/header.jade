@@ -12,6 +12,9 @@ html
     script(type='text/javascript', charset='UTF-8', src='/js/jquery.dataTables.min.js', defer)
     script(type='text/javascript', charset='UTF-8', src='/js/dataTables.bootstrap.js' defer)
     script(type='text/javascript', charset='UTF-8', src='/js/main_head.js')
+   if(locals.scenarios)
+    script(type='text/javascript').
+      Tessy.scenarios = !{JSON.stringify(locals.scenarios)};
   body
    .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       .container
