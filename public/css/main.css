@@ -22,6 +22,8 @@ div[role=navigation] .container { margin-left: 0px; }
   top:  10px;
 } 
 
+/* DROP DOWN MENUS */
+
 .btn-group .caret{
   margin-left: 5px;
 }
@@ -31,6 +33,25 @@ div[role=navigation] .container { margin-left: 0px; }
   right: 0;
 }
 
+.dropdown-menu a:hover {
+  background-color: #ddd !important;
+}
+
+
+
+/* DROP DOWN MENUS */
+
+
+
+
+#execute{
+  float: right;
+}
+
+#execute .dropdown-menu{
+  left: auto;
+  right: 0px; 
+}
 
 /*DataTable overrides */
 
