@@ -28,7 +28,16 @@ div.container-fluid
            li
               each component in locals.components 
                 a(href="/testcases/#{company}/#{team}/#{component}")= component 
-
+      if(locals.scenarios)
+       div.btn-group#execute
+          button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Execute 
+           span.caret
+          ul.dropdown-menu(role="menu")
+           li
+            a(href='#') All
+            a(href='#') Customized 
+            a(href='#') Selected 
+        
 
     if(locals.scenarios)
       div.table-responsive
