@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.19, for osx10.9 (x86_64)
+-- MySQL dump 10.15  Distrib 10.0.11-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: tessy
 -- ------------------------------------------------------
--- Server version	5.6.19
+-- Server version	10.0.11-MariaDB-1~saucy-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,7 @@ CREATE TABLE `accounts` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +89,28 @@ INSERT INTO `component` VALUES (1,'Login'),(2,'Filters'),(3,'Header'),(4,'Footer
 UNLOCK TABLES;
 
 --
+-- Table structure for table `devices`
+--
+
+DROP TABLE IF EXISTS `devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `devices` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `devices`
+--
+
+LOCK TABLES `devices` WRITE;
+/*!40000 ALTER TABLE `devices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `devices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `relate`
 --
 
@@ -145,6 +167,44 @@ INSERT INTO `team` VALUES (1,'Customer'),(2,'Search'),(3,'Mobile'),(4,'OffSet'),
 UNLOCK TABLES;
 
 --
+-- Table structure for table `testcase_executions`
+--
+
+DROP TABLE IF EXISTS `testcase_executions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `testcase_executions` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `testcase_id` mediumint(9) DEFAULT NULL,
+  `step_id` mediumint(9) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `result` tinyint(1) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `author_id` smallint(6) DEFAULT NULL,
+  `tester_id` smallint(6) DEFAULT NULL,
+  `device_id` tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_device_id` (`device_id`),
+  KEY `fk_tester_id` (`tester_id`),
+  KEY `fk_author_id` (`author_id`),
+  CONSTRAINT `fk_author_id` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_device_id` FOREIGN KEY (`device_id`) REFERENCES `devices` (`id`),
+  CONSTRAINT `fk_tester_id` FOREIGN KEY (`tester_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `testcase_executions`
+--
+
+LOCK TABLES `testcase_executions` WRITE;
+/*!40000 ALTER TABLE `testcase_executions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `testcase_executions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `testcases`
 --
 
@@ -159,7 +219,7 @@ CREATE TABLE `testcases` (
   PRIMARY KEY (`tc_id`),
   KEY `tc_relate_id` (`tc_relate_id`),
   CONSTRAINT `testcases_ibfk_1` FOREIGN KEY (`tc_relate_id`) REFERENCES `relate` (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +271,7 @@ CREATE TABLE `users` (
   `password_hash` varchar(100) DEFAULT NULL,
   `email_main` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-25 22:46:53
+-- Dump completed on 2014-10-22 23:20:57
