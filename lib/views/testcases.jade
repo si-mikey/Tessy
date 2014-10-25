@@ -39,7 +39,7 @@ div.container-fluid
              th#tc_scenario TC_SCENARIO
           tbody
            each scenario in locals.scenarios
-            tr(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}", data-target=".scenario-modal")
+            tr.scenario-row(data-id="#{scenario.tc_id}", data-steps="#{scenario.tc_steps}", data-target=".scenario-modal")
              td.scenario-id= scenario.tc_id
              td.scenario-name= scenario.tc_scenario
       
@@ -51,78 +51,80 @@ div.container-fluid
               button.close.modal-close(type="button")
                 span(aria-hidden="true") &times;
                 span.sr-only close
-              h4.modal-title Modal Title
+              h4.modal-title 
+            div.modal-body-status.alert(role="alert")
             div.modal-body
             div.modal-footer
               button.btn.btn-default.modal-close(type="button") Close
               button.btn.btn-primary#modal-save(type="button") Save Changes  
 
   script(type='text/javascript').
-    //Sets labels on the dropdowns with the selected values ( based on url params )
-    tessy.helper.setDropDownText();
+  
+   $(document).ready(function(){
 
-    //highlight row on click
-    tessy.helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
-    
+      //Sets labels on the dropdowns with the selected values ( based on url params )
+      Helper.setDropDownText();
 
-    //show modal with steps on double click
-    $("#scenariosTable tbody tr").on("dblclick", function(evt){
+      //highlight row on click
+      Helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
+  
+      //DataTable initialize
+      $("#scenariosTable").DataTable();    
+  
+      //object to handle the modal 
+      var modal = new Modal('.scenario-modal');
 
-      var row          = evt.target.parentNode;
-      var scenarioName = row.children[1].innerHTML;
-      var stepIds      = row.dataset.steps;
-      var modalData    = '';
-      var stepsPromise = tessy.testCases.getSteps(stepIds);
-      stepsPromise.success(function(steps){ 
-       tessy.modals.setModalTitle(".scenario-modal .modal-title", scenarioName);
-       steps.map(function(step){
-         modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
+      //object to get and update testcases
+      var testCase = new TestCases();
+
+      //show modal with steps on double click
+      $("#scenariosTable tbody").on("dblclick", ".scenario-row", function(evt){
+        var row          = evt.target.parentNode;
+        var scenarioName = row.children[1].innerHTML;
+        var stepIds      = row.dataset.steps;
+        var modalData    = '';
+        var stepsPromise = testCase.getSteps(stepIds);
+        stepsPromise.success(function(steps){ 
+         steps.map(function(step){
+           modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
+          }); 
+         modal.setTitle(scenarioName);
+         modal.setBody(modalData);
+         modal.toggle('show'); 
         }); 
-        tessy.modals.appendTo('.scenario-modal .modal-body', modalData);
-      }); 
-      $(".scenario-modal").modal('show');
-    });
+      });
 
-    $(".modal-body").on('dblclick', ".step-row",  function(evt){
-   
-        var stepId         = evt.target.dataset.id;
-        var stepText       = evt.target.innerHTML
-        var row            = evt.target;
-        var rowInput       = document.createElement("input");
-        rowInput.name      = stepId;
-        rowInput.value     = stepText;
-        rowInput.className = 'steps-input';
-        row.innerHTML      = '';
-        row.appendChild(rowInput); 
-    })
+      $(".modal-body").on('dblclick', ".step-row",  function(evt){
+        modal.editStep(evt); 
+      })
 
-    $("#modal-save").on('click', function(evt){
-      
-        $.ajax({
-          type: "POST",
-          url: "/api/steps/updateById",
-          data: { steps: $("#scenarioSteps").serializeArray() }
-        }).done(function(status){
-                
-          if(status == 'ok'){ 
-         
-            $(".scenario-modal").modal('hide');
-          }
-        })
-    });
+      $("#modal-save").on('click', function(evt){
+        var steps = $("#scenarioSteps").serializeArray() 
+        if(steps.length){ 
+          var savePromise = testCase.saveSteps(steps); 
+          savePromise.success(function(status){
+           if(status === 'ok') { 
+            modal.setStatus('success', 'Successfully saved your changes.');
+            modal.toggle('hide', 2000); 
+           }else{
+            modal.setStatus('danger', 'Something bad happened while saving.');
+           } 
+          });
+        }else{
+          modal.toggle('hide');
+        }
+      });
 
-    $(".modal-close").on("click", function(evt){
-      $(".scenario-modal").modal("hide"); 
-      $("#scenarioSteps .modal-body").html("");
-    });
+      $(".modal-close").on("click", function(evt){
+        modal.toggle('hide'); 
+      });
 
-    $(".scenario-modal").on("keyup", function(evt){
-      if(evt.keyCode == 27){ 
-        $(".scenario-modal").modal("hide");
-        $("#scenarioSteps .modal-body").html(""); 
-      }
-    });
-    
+      $(".scenario-modal").on("keyup", function(evt){
+        if(evt.keyCode == 27){ 
+          modal.toggle('hide'); 
+        }
+      });
+   });
    
 
 include comps/footer.jade
