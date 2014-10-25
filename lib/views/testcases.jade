@@ -28,7 +28,16 @@ div.container-fluid
            li
               each component in locals.components 
                 a(href="/testcases/#{company}/#{team}/#{component}")= component 
-
+      if(locals.scenarios)
+       div.btn-group#execute
+          button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Execute 
+           span.caret
+          ul.dropdown-menu(role="menu")
+           li
+            a#exec-all(href='#') All
+            a#exec-customized(href='#') Customized 
+            a#exec-selected(href='#') Selected 
+        
 
     if(locals.scenarios)
       div.table-responsive
@@ -67,6 +76,9 @@ div.container-fluid
 
       //highlight row on click
       Helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
+      
+      //collect rows before Datatable takes them 
+      Tessy.rows = $("#scenariosTable tbody tr");
   
       //DataTable initialize
       $("#scenariosTable").DataTable();    
