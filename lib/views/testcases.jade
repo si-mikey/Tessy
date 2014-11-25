@@ -10,8 +10,8 @@ div.container-fluid
         ul.dropdown-menu(role="menu")
          li
           if(locals.companies)
-            each company in locals.companies 
-              a(href="/testcases/#{company}")= company
+            each c in locals.companies 
+              a(href="/testcases/#{c.company_name}")= c.company_name
       if(locals.teams)
         div.btn-group#teams
           button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Team 
@@ -19,7 +19,7 @@ div.container-fluid
           ul.dropdown-menu(role="menu")
            li
               each team in locals.teams 
-                a(href="/testcases/#{company}/#{team}")= team 
+                a(href="/testcases/#{company}/#{team.team_name}")= team.team_name 
       if(locals.components)
         div.btn-group#components
           button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Component 
