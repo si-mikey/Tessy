@@ -14,7 +14,7 @@
     "bcryptjs"    : "2.0.2",
     "underscore"  : "1.7.0",
     "validator"   : "3.19.0",
-    "body-parser" : "1.9.0",
+    "body-parser" : "1.9.3",
     "knex"        : "0.7.3"
   }
 }
