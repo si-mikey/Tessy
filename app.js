@@ -1,11 +1,12 @@
-var express   = require('express');
-var http      = require('http');
-var path      = require('path');
-var yaml      = require('yamljs');
-var bodyParser = require('body-parser');
-var routes    = require('./lib/routes');
-var testcases = require('./lib/routes/testcases.js');
-var app = express();
+var express     = require('express');
+var http        = require('http');
+var path        = require('path');
+var yaml        = require('yamljs');
+var bodyParser  = require('body-parser');
+var routes      = require('./lib/routes');
+var testcases   = require('./lib/routes/testcases.js');
+var Tessy       = require('./lib/tessy.js');
+var app         = express();
 
 // all environments
 app.set('port', process.env.PORT || 8000);
@@ -107,8 +108,9 @@ app.get('/logout', function(req, res, next){
 //API ROUTES
 app.get('/api/steps/getById', testcases.getSteps); 
 app.post('/api/steps/updateById', testcases.updateById); 
+app.get('/api/getCompanies', Tessy.getCompanies);
 
-    
+
 //start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
