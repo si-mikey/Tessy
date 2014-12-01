@@ -110,8 +110,9 @@ var Modal = Backbone.Model.extend({
       }, delay);
 
      }else{
-        $(this.modal).modal(toggle); 
-  }  } 
+      $(this.modal).modal(toggle); 
+     }  
+  } 
   
 });
 

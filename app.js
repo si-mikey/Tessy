@@ -5,7 +5,7 @@ var yaml        = require('yamljs');
 var bodyParser  = require('body-parser');
 var routes      = require('./lib/routes');
 var testcases   = require('./lib/routes/testcases.js');
-var Tessy       = require('./lib/tessy.js');
+var Tessy       = require('./lib/helper.js');
 var app         = express();
 
 // all environments
@@ -38,7 +38,7 @@ function requireLoggedIn(req, res, next){
 }    
 
 //set shared locals to all views if user is logged in
-function setLocals(req, res, next){
+function setUser(req, res, next){
   if(typeof req.session.user == 'object'){
     var user = req.session.user;
     res.locals.user = user; 
@@ -47,68 +47,66 @@ function setLocals(req, res, next){
 }
 
 //array of callbacks for routes
-var defaultCallbacks = [requireLoggedIn, setLocals];
+var initSession = [requireLoggedIn, setUser];
 
 //route mappers
 app.get('/', defaultCallbacks, routes.home);
 app.get('/index', defaultCallbacks, routes.home);
 app.get('/home', defaultCallbacks, routes.home);
 
-var testcase_data = [testcases.getCompanies, testcases.getTeams, testcases.getComponents];
-
-app.get('/testcases', defaultCallbacks, testcase_data[0], function(req, res){
-
-    res.locals.companies = req.session.companies;
-    res.render('testcases', {title: 'Tessy - Testcases'});
-
-});
-
-app.get('/testcases/:company', defaultCallbacks, testcase_data[0], testcase_data[1], function(req, res){
-    
-    res.locals.company    = req.params.company;
-    res.locals.companies  = req.session.companies;
-    res.locals.teams      = req.session.teams;
-    res.render('testcases', {title: 'Tessy - Testcases'});
-});
-
-app.get('/testcases/:company/:team', defaultCallbacks, testcase_data, function(req, res){
-    
-    res.locals.company    = req.params.company;
-    res.locals.team       = req.params.team;
-    res.locals.companies  = req.session.companies;
-    res.locals.teams      = req.session.teams;
-    res.locals.components = req.session.components; 
-    res.render('testcases', {title: 'Tessy - Testcases'});    
-});
-
-app.get('/testcases/:company/:team/:component', defaultCallbacks, testcase_data, testcases.getScenarios, function(req, res){
+//var testcase_data = [testcases.getCompanies, testcases.getTeams, testcases.getComponents];
+//
+//app.get('/testcases', defaultCallbacks, testcase_data[0], function(req, res){
+//
+//    res.locals.companies = req.session.companies;
+//    res.render('testcases', {title: 'Tessy - Testcases'});
+//
+//});
+//
+//app.get('/testcases/:company', defaultCallbacks, testcase_data[0], testcase_data[1], function(req, res){
+//    
+//    res.locals.company    = req.params.company;
+//    res.locals.companies  = req.session.companies;
+//    res.locals.teams      = req.session.teams;
+//    res.render('testcases', {title: 'Tessy - Testcases'});
+//});
+//
+//app.get('/testcases/:company/:team', defaultCallbacks, testcase_data, function(req, res){
+//    
+//    res.locals.company    = req.params.company;
+//    res.locals.team       = req.params.team;
+//    res.locals.companies  = req.session.companies;
+//    res.locals.teams      = req.session.teams;
+//    res.locals.components = req.session.components; 
+//    res.render('testcases', {title: 'Tessy - Testcases'});    
+//});
+//
+app.get('/testcases/:company/:team/:component', initSession, function(req, res, next){
  
-    res.locals.company    = req.params.company;
-    res.locals.team       = req.params.team;
-    res.locals.companies  = req.session.companies;
-    res.locals.teams      = req.session.teams;
-    res.locals.components = req.session.components; 
     res.render('testcases', {title: 'Tessy - Testcases'});
-
 });
 
-app.get('/reports', defaultCallbacks, routes.reports);
-app.get('/manage', defaultCallbacks, routes.manage);
-app.get('/login', routes.login);
-app.post('/dologin', routes.dologin);
-app.get('/account', defaultCallbacks, routes.myaccount);
-app.get('/logout', function(req, res, next){
-    
-     req.session.destroy();
-     res.redirect('/index'); 
-     next();
-});
-
+//app.get('/reports', defaultCallbacks, routes.reports);
+//app.get('/manage', defaultCallbacks, routes.manage);
+//app.get('/login', routes.login);
+//app.post('/dologin', routes.dologin);
+//app.get('/account', defaultCallbacks, routes.myaccount);
+//app.get('/logout', function(req, res, next){
+//    
+//     req.session.destroy();
+//     res.redirect('/index'); 
+//     next();
+//});
+//
+//
 
 //API ROUTES
 app.get('/api/steps/getById', testcases.getSteps); 
 app.post('/api/steps/updateById', testcases.updateById); 
-app.get('/api/getCompanies', Tessy.getCompanies);
+
+app.get('/api/getAllCompanies', Tessy.getAllCompanies);
+app.get('/api/getTeamsByCompanyId/:companyId', Tessy.getTeamsByCompanyId);
+app.get('/api/getComponentsByTeamId/:teamId', Tessy.getComponentsByTeamId);
 
 
 //start the server
