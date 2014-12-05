@@ -50,20 +50,20 @@ function setUser(req, res, next){
 var initSession = [requireLoggedIn, setUser];
 
 //route mappers
-app.get('/', defaultCallbacks, routes.home);
-app.get('/index', defaultCallbacks, routes.home);
-app.get('/home', defaultCallbacks, routes.home);
+app.get('/',      initSession, routes.home);
+app.get('/index', initSession, routes.home);
+app.get('/home',  initSession, routes.home);
 
 //var testcase_data = [testcases.getCompanies, testcases.getTeams, testcases.getComponents];
 //
-//app.get('/testcases', defaultCallbacks, testcase_data[0], function(req, res){
+//app.get('/testcases', initSession, testcase_data[0], function(req, res){
 //
 //    res.locals.companies = req.session.companies;
 //    res.render('testcases', {title: 'Tessy - Testcases'});
 //
 //});
 //
-//app.get('/testcases/:company', defaultCallbacks, testcase_data[0], testcase_data[1], function(req, res){
+//app.get('/testcases/:company', initSession, testcase_data[0], testcase_data[1], function(req, res){
 //    
 //    res.locals.company    = req.params.company;
 //    res.locals.companies  = req.session.companies;
@@ -71,7 +71,7 @@ app.get('/home', defaultCallbacks, routes.home);
 //    res.render('testcases', {title: 'Tessy - Testcases'});
 //});
 //
-//app.get('/testcases/:company/:team', defaultCallbacks, testcase_data, function(req, res){
+//app.get('/testcases/:company/:team', initSession, testcase_data, function(req, res){
 //    
 //    res.locals.company    = req.params.company;
 //    res.locals.team       = req.params.team;
@@ -81,24 +81,22 @@ app.get('/home', defaultCallbacks, routes.home);
 //    res.render('testcases', {title: 'Tessy - Testcases'});    
 //});
 //
-app.get('/testcases/:company/:team/:component', initSession, function(req, res, next){
- 
+app.get('/testcases/:company?/:team?/:components?', initSession, Tessy.getAllCompanies, function(req, res, next){
+    console.log(Tessy.getTeamsByCompanyId(req, res, next)); 
     res.render('testcases', {title: 'Tessy - Testcases'});
 });
 
-//app.get('/reports', defaultCallbacks, routes.reports);
-//app.get('/manage', defaultCallbacks, routes.manage);
-//app.get('/login', routes.login);
-//app.post('/dologin', routes.dologin);
-//app.get('/account', defaultCallbacks, routes.myaccount);
-//app.get('/logout', function(req, res, next){
-//    
-//     req.session.destroy();
-//     res.redirect('/index'); 
-//     next();
-//});
-//
-//
+app.get('/reports', initSession, routes.reports);
+app.get('/manage', initSession, routes.manage);
+app.get('/login', routes.login);
+app.post('/dologin', routes.dologin);
+app.get('/account', initSession, routes.myaccount);
+app.get('/logout', function(req, res, next){
+  req.session.destroy();
+  res.redirect('/index'); 
+  next();
+});
+
 
 //API ROUTES
 app.get('/api/steps/getById', testcases.getSteps); 
