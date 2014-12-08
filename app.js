@@ -104,6 +104,7 @@ app.post('/api/steps/updateById', testcases.updateById);
 
 app.get('/api/getAllCompanies', Tessy.getAllCompanies);
 app.get('/api/getTeamsByCompanyId/:companyId', Tessy.getTeamsByCompanyId);
+app.get('/api/getTeamsByCompanyName/:companyName', Tessy.getTeamsByCompanyName);
 app.get('/api/getComponentsByTeamId/:teamId', Tessy.getComponentsByTeamId);
 
 
