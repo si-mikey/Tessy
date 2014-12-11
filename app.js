@@ -82,7 +82,6 @@ app.get('/home',  initSession, routes.home);
 //});
 //
 app.get('/testcases/:company?/:team?/:components?', initSession, Tessy.getAllCompanies, function(req, res, next){
-    console.log(Tessy.getTeamsByCompanyId(req, res, next)); 
     res.render('testcases', {title: 'Tessy - Testcases'});
 });
 
