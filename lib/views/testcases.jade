@@ -27,7 +27,7 @@ div.container-fluid
           ul.dropdown-menu(role="menu")
            li
               each component in locals.components 
-                a(href="/testcases/#{company}/#{team}/#{component}")= component 
+                a(href="/testcases/#{company}/#{team}/#{component.co_name}")= component.co_name 
       if(locals.scenarios)
        div.btn-group#execute
           button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button") Execute 

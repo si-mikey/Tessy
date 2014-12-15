@@ -81,7 +81,12 @@ app.get('/home',  initSession, routes.home);
 //    res.render('testcases', {title: 'Tessy - Testcases'});    
 //});
 //
-app.get('/testcases/:company?/:team?/:components?', function(req, res, next){
+
+var callbacks = [Tessy.getAllCompanies, Tessy.getTeamsByCompanyName, Tessy.getComponentsByTeamName];
+app.get('/testcases/:companyName?/:teamName?/:componentName?', callbacks, function(req, res, next){
+  
+  res.locals.company = req.params.companyName;
+  res.locals.team    = req.params.teamName;
 
   res.render('testcases', {title: 'Tessy - Testcases'});
 
