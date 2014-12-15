@@ -81,8 +81,10 @@ app.get('/home',  initSession, routes.home);
 //    res.render('testcases', {title: 'Tessy - Testcases'});    
 //});
 //
-app.get('/testcases/:company?/:team?/:components?', initSession, Tessy.getAllCompanies, function(req, res, next){
-    res.render('testcases', {title: 'Tessy - Testcases'});
+app.get('/testcases/:company?/:team?/:components?', function(req, res, next){
+
+  res.render('testcases', {title: 'Tessy - Testcases'});
+
 });
 
 app.get('/reports', initSession, routes.reports);
@@ -105,6 +107,7 @@ app.get('/api/getAllCompanies', Tessy.getAllCompanies);
 app.get('/api/getTeamsByCompanyId/:companyId', Tessy.getTeamsByCompanyId);
 app.get('/api/getTeamsByCompanyName/:companyName', Tessy.getTeamsByCompanyName);
 app.get('/api/getComponentsByTeamId/:teamId', Tessy.getComponentsByTeamId);
+app.get('/api/getComponentsByTeamName/:teamName', Tessy.getComponentsByTeamName);
 
 
 //start the server
