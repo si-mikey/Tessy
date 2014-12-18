@@ -4,7 +4,7 @@ var path        = require('path');
 var yaml        = require('yamljs');
 var bodyParser  = require('body-parser');
 var routes      = require('./lib/routes');
-var testcases   = require('./lib/routes/testcases.js');
+var TestCases   = require('./lib/routes/testcases.js');
 var Tessy       = require('./lib/helper.js');
 var app         = express();
 
@@ -54,40 +54,13 @@ app.get('/',      initSession, routes.home);
 app.get('/index', initSession, routes.home);
 app.get('/home',  initSession, routes.home);
 
-//var testcase_data = [testcases.getCompanies, testcases.getTeams, testcases.getComponents];
-//
-//app.get('/testcases', initSession, testcase_data[0], function(req, res){
-//
-//    res.locals.companies = req.session.companies;
-//    res.render('testcases', {title: 'Tessy - Testcases'});
-//
-//});
-//
-//app.get('/testcases/:company', initSession, testcase_data[0], testcase_data[1], function(req, res){
-//    
-//    res.locals.company    = req.params.company;
-//    res.locals.companies  = req.session.companies;
-//    res.locals.teams      = req.session.teams;
-//    res.render('testcases', {title: 'Tessy - Testcases'});
-//});
-//
-//app.get('/testcases/:company/:team', initSession, testcase_data, function(req, res){
-//    
-//    res.locals.company    = req.params.company;
-//    res.locals.team       = req.params.team;
-//    res.locals.companies  = req.session.companies;
-//    res.locals.teams      = req.session.teams;
-//    res.locals.components = req.session.components; 
-//    res.render('testcases', {title: 'Tessy - Testcases'});    
-//});
-//
 
 var callbacks = [Tessy.getAllCompanies, Tessy.getTeamsByCompanyName, Tessy.getComponentsByTeamName];
 app.get('/testcases/:companyName?/:teamName?/:componentName?', callbacks, function(req, res, next){
   
-  res.locals.company = req.params.companyName;
-  res.locals.team    = req.params.teamName;
-
+  res.locals.company   = req.params.companyName;
+  res.locals.team      = req.params.teamName;
+  res.locals.component = req.params.componentName;
   res.render('testcases', {title: 'Tessy - Testcases'});
 
 });
@@ -105,14 +78,17 @@ app.get('/logout', function(req, res, next){
 
 
 //API ROUTES
-app.get('/api/steps/getById', testcases.getSteps); 
-app.post('/api/steps/updateById', testcases.updateById); 
+app.get('/api/steps/getById', TestCases.getSteps); 
+app.post('/api/steps/updateById', TestCases.updateById); 
 
 app.get('/api/getAllCompanies', Tessy.getAllCompanies);
 app.get('/api/getTeamsByCompanyId/:companyId', Tessy.getTeamsByCompanyId);
 app.get('/api/getTeamsByCompanyName/:companyName', Tessy.getTeamsByCompanyName);
 app.get('/api/getComponentsByTeamId/:teamId', Tessy.getComponentsByTeamId);
 app.get('/api/getComponentsByTeamName/:teamName', Tessy.getComponentsByTeamName);
+app.post
+
+
 
 
 //start the server
