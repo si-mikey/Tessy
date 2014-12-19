@@ -78,17 +78,16 @@ app.get('/logout', function(req, res, next){
 
 
 //API ROUTES
-app.get('/api/steps/getById', TestCases.getSteps); 
-app.post('/api/steps/updateById', TestCases.updateById); 
+//app.get('/api/steps/getById',     TestCases.getSteps); 
+//app.post('/api/steps/updateById', TestCases.updateById); 
+//
+//app.get('/api/getAllCompanies',                                Tessy.getAllCompanies);
+//app.get('/api/getTeamsByCompanyId/:companyId',                 Tessy.getTeamsByCompanyId);
+//app.get('/api/getTeamsByCompanyName/:companyName',             Tessy.getTeamsByCompanyName);
+//app.get('/api/getComponentsByTeamId/:teamId',                  Tessy.getComponentsByTeamId);
+//app.get('/api/getComponentsByTeamName/:teamName',              Tessy.getComponentsByTeamName);
 
-app.get('/api/getAllCompanies', Tessy.getAllCompanies);
-app.get('/api/getTeamsByCompanyId/:companyId', Tessy.getTeamsByCompanyId);
-app.get('/api/getTeamsByCompanyName/:companyName', Tessy.getTeamsByCompanyName);
-app.get('/api/getComponentsByTeamId/:teamId', Tessy.getComponentsByTeamId);
-app.get('/api/getComponentsByTeamName/:teamName', Tessy.getComponentsByTeamName);
-app.post
-
-
+app.get('/api/scenarios/byCompanyIdTeamIdComponentId/:companyId/:teamId/:componentId', TestCases.getScenariosByCompanyIdTeamIdComponentId);
 
 
 //start the server
