@@ -55,7 +55,7 @@ app.get('/index', initSession, routes.home);
 app.get('/home',  initSession, routes.home);
 
 
-var callbacks = [Tessy.getAllCompanies, Tessy.getTeamsByCompanyName, Tessy.getComponentsByTeamName];
+var callbacks = [Tessy.getAllCompanies, Tessy.getTeamsByCompanyName, Tessy.getComponentsByTeamName, TestCases.getScenariosByCompanyIdTeamIdComponentId];
 app.get('/testcases/:companyName?/:teamName?/:componentName?', callbacks, function(req, res, next){
   
   res.locals.company   = req.params.companyName;
