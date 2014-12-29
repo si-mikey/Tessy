@@ -1,20 +1,21 @@
 {
   "name": "Tessy",
   "description": "Test management",
-  "version"    : "0.0.1",
-  "repository" : {
-    "type"   : "git",
-    "url"    : "http://github.com/si-mikey/Tessy.git"
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/si-mikey/Tessy.git"
   },
-  "dependencies"  : {
-    "express"     : "3.x",
-    "jade"        : "1.7.0",
-    "mariasql"    : "0.1.21",
-    "yamljs"      : "0.2.0",
-    "bcryptjs"    : "2.0.2",
-    "underscore"  : "1.7.0",
-    "validator"   : "3.19.0",
-    "body-parser" : "1.9.3",
-    "knex"        : "0.7.3"
+  "dependencies": {
+    "bcryptjs": "2.0.2",
+    "body-parser": "1.9.3",
+    "express": "3.x",
+    "jade": "1.7.0",
+    "knex": "0.7.3",
+    "lodash-node": "^2.4.1",
+    "mariasql": "0.1.21",
+    "underscore": "1.7.0",
+    "validator": "3.19.0",
+    "yamljs": "0.2.0"
   }
 }

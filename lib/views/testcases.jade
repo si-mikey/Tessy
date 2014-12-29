@@ -88,6 +88,8 @@ div.container-fluid
 
       //show modal with steps on double click
       $("#scenariosTable tbody").on("dblclick", ".scenario-row", function(evt){
+       
+        var modal        = new Modal('.scenario-modal');
         var row          = evt.target.parentNode;
         var scenarioName = row.children[1].innerHTML;
         var stepIds      = row.dataset.steps;
@@ -133,6 +135,18 @@ div.container-fluid
           modal.toggle('hide'); 
         }
       });
+      
+      $("#exec-customized").on('click', function(){
+
+       var modal = new Modal('.scenario-modal');
+       modal.setTitle('Execute Scenarios');
+       
+
+
+       modal.setBody('<div class="table-responsive"><table class="table"><td>ass</td></table></div>');
+       modal.toggle('show');
+      });
+
    });
    
 

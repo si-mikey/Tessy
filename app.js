@@ -55,14 +55,14 @@ app.get('/index', initSession, routes.home);
 app.get('/home',  initSession, routes.home);
 
 
-var callbacks = [Tessy.getAllCompanies, Tessy.getTeamsByCompanyName, Tessy.getComponentsByTeamName, TestCases.getScenariosByCompanyIdTeamIdComponentId];
-app.get('/testcases/:companyName?/:teamName?/:componentName?', callbacks, function(req, res, next){
+var callbacks = [Tessy.getAllCompanies, Tessy.getTeamsByCompanyName, Tessy.getComponentsByTeamName];
+callbacks.push(TestCases.scenariosByCTCNames);
+app.get('/testcases/:companyName?/:teamName?/:componentName?', initSession, callbacks, function(req, res, next){
   
   res.locals.company   = req.params.companyName;
   res.locals.team      = req.params.teamName;
   res.locals.component = req.params.componentName;
   res.render('testcases', {title: 'Tessy - Testcases'});
-
 });
 
 app.get('/reports', initSession, routes.reports);
@@ -77,17 +77,20 @@ app.get('/logout', function(req, res, next){
 });
 
 
+
 //API ROUTES
+app.get('/api/getAllCompanies',                     Tessy.getAllCompanies);
+//app.get('/api/getTeamsByCompanyId/:companyId',      Tessy.getTeamsByCompanyId);
+app.get('/api/getTeamsByCompanyName/:companyName',  Tessy.getTeamsByCompanyName);
+//app.get('/api/getComponentsByTeamId/:teamId',       Tessy.getComponentsByTeamId);
+app.get('/api/getComponentsByTeamName/:teamName',   Tessy.getComponentsByTeamName);
+
+//Testcase routes
+//app.get('/api/scenariosByCTCIds/:companyId/:teamId/:componentId', TestCases.scenariosByCTCIds);
+app.get('/api/scenariosByCTCNames/:companyName/:teamName/:componentName', TestCases.scenariosByCTCNames);
+
 app.get('/api/steps/getById',     TestCases.getStepsById); 
 app.post('/api/steps/updateById', TestCases.updateById); 
-
-app.get('/api/getAllCompanies',                                Tessy.getAllCompanies);
-app.get('/api/getTeamsByCompanyId/:companyId',                 Tessy.getTeamsByCompanyId);
-app.get('/api/getTeamsByCompanyName/:companyName',             Tessy.getTeamsByCompanyName);
-app.get('/api/getComponentsByTeamId/:teamId',                  Tessy.getComponentsByTeamId);
-app.get('/api/getComponentsByTeamName/:teamName',              Tessy.getComponentsByTeamName);
-
-app.get('/api/scenarios/byCompanyIdTeamIdComponentId/:companyId/:teamId/:componentId', TestCases.getScenariosByCompanyIdTeamIdComponentId);
 
 
 //start the server

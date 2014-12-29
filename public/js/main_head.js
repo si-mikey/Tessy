@@ -93,8 +93,8 @@ var Modal = Backbone.Model.extend({
 
   },
   
-  setFooter: function(data){
-   $(this.modal + " .modal-footer"); 
+  setFooter: function(content){
+   $(this.modal + " .modal-footer").html(content); 
   },
 
   toggle: function(toggle, delay){
