@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+if test nvm; then
+  nvm use v0.10
+else
+  echo "node version v0.10 needed"
+fi
+
+[[ $@ =~ 'prod' ]] && export SITE_MODE='prod' || export SITE_MODE='dev'
+
