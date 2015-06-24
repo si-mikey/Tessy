@@ -1,10 +1,19 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash 
 
-if test nvm; then
+# checks if nvm is install
+if type nvm 2>/dev/null; then
   nvm use v0.10
 else
-  echo "node version v0.10 needed"
+  echo "Install NVM with node version v0.10.x "
 fi
 
+# checks arguments for env 
 [[ $@ =~ 'prod' ]] && export SITE_MODE='prod' || export SITE_MODE='dev'
+
+# temp session key
+export SECRET_SESS_KEY=$RANDOM$RANDOM$RANDOM
+
+node app.js
+
+
 

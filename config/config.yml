@@ -6,7 +6,7 @@ development:
     port: 3306 
     db: 'tessy' 
     user: 'root' 
-    password: 'testing' 
+    password: '' 
 production:
   server:
     port: 8000
