@@ -116,7 +116,7 @@ div.container-fluid
       $("#modal-save").on('click', function(evt){
         var steps = $("#scenarioSteps").serializeArray() 
         if(steps.length){ 
-          var savePromise = testCase.saveSteps(steps); 
+          var savePromise = testCase.saveStep(steps); 
           savePromise.success(function(status){
            if(status === 'ok') { 
             modal.setStatus('success', 'Successfully saved your changes.');

@@ -35,11 +35,11 @@ var TestCases = Backbone.Model.extend({
            data: { stepIds : stepIds }
           });  
   },
-  saveSteps : function(steps){
+  saveStep : function(step){
    return $.ajax({
             type: "POST",
-            url: "/api/steps/updateById",
-            data: { steps: steps }
+            url: "/api/steps/update",
+            data: { step : step }
           });
   }
 });

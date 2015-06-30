@@ -80,17 +80,25 @@ app.get('/logout', function(req, res, next){
 
 //API ROUTES
 app.get('/api/getAllCompanies',                     Tessy.getAllCompanies);
-//app.get('/api/getTeamsByCompanyId/:companyId',      Tessy.getTeamsByCompanyId);
 app.get('/api/getTeamsByCompanyName/:companyName',  Tessy.getTeamsByCompanyName);
-//app.get('/api/getComponentsByTeamId/:teamId',       Tessy.getComponentsByTeamId);
 app.get('/api/getComponentsByTeamName/:teamName',   Tessy.getComponentsByTeamName);
 
 //Testcase routes
-//app.get('/api/scenariosByCTCIds/:companyId/:teamId/:componentId', TestCases.scenariosByCTCIds);
 app.get('/api/scenariosByCTCNames/:companyName/:teamName/:componentName', TestCases.scenariosByCTCNames);
 
-app.get('/api/steps/getById',     TestCases.getStepsById); 
-app.post('/api/steps/updateById', TestCases.updateById); 
+
+
+
+app.get('/api/steps/getById', TestCases.getStepsById); 
+app.post('/api/steps/update', TestCases.updateStep); 
+
+
+
+
+
+
+
+
 
 
 //start the server
