@@ -7,7 +7,7 @@
 [[ $@ =~ 'prod' ]] && export SITE_MODE='prod' || export SITE_MODE='dev'
 
 # temp session key
-export SECRET_SESS_KEY=$RANDOM$RANDOM$RANDOM
+export SECRET_SESS_KEY=$(uuidgen)
 
 node app.js
 

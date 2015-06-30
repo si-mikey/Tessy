@@ -4,7 +4,6 @@ var Helper = window.Helper || {};
 var Helper =  {
 
   setDropDownText : function(){
-
     var params = window.location.pathname.split("/").slice(2,5);
     if( params.length > 0){
       var dropDowns = document.querySelectorAll(".span10 button");
@@ -16,36 +15,27 @@ var Helper =  {
   },
 
   highlightTblRow  : function(tblSelector, highlightClass){
-
    $(tblSelector).on("click", function(evt){
      var row = evt.target.parentNode;
      if($(row).hasClass(highlightClass)){
-
       $(row).removeClass(highlightClass)
-    }else{
-
+     }else{
       $(row).addClass(highlightClass);
     }
    });
-
   } 
 
 };
 
-
 var TestCases = Backbone.Model.extend({
-
   getSteps : function(stepIds){
-      
    return $.ajax({
            type: "GET",
            url: "/api/steps/getById",
            data: { stepIds : stepIds }
-        });  
+          });  
   },
-
   saveSteps : function(steps){
-
    return $.ajax({
             type: "POST",
             url: "/api/steps/updateById",
@@ -54,29 +44,32 @@ var TestCases = Backbone.Model.extend({
   }
 });
 
-
 var Modal = Backbone.Model.extend({
-
   initialize: function(modal){
    this.modal = modal;
   },
-
-  setTitle: function(newTitle){
-    $(this.modal + " .modal-title").html(newTitle);
+  editTitle: function(evt){
+   var elem            = evt.target;
+   var scenarioTitle   = elem.innerHTML;
+   var editInput       = document.createElement("input");
+   editInput.value     = scenarioTitle;
+   editInput.className = 'form-control' 
+   $(this.modal + " .modal-title").html(editInput);
   },
-
+  setTitle: function(newTitle, scenarioId){
+    $(this.modal + " .modal-title").html(newTitle);
+    $(this.modal + " .modal-title").attr("data-id", scenarioId);
+  },
   setStatus: function(type, msg){
     $(this.modal + " .modal-body-status").addClass('alert-'+type).html(msg);
   },
-  
   clearStatus: function(){
-    $(this.modal + " .modal-body-status").removeClass('alert-danger').removeClass('alert-success').html('');
+    $(this.modal + " .modal-body-status")
+      .removeClass('alert-danger').removeClass('alert-success').html('');
   },
-
   setBody: function(content){
     $(this.modal + " .modal-body").html(content);
   },
-  
   editStep: function(evt){
     var stepId         = evt.target.dataset.id;
     var stepText       = evt.target.innerHTML
@@ -88,17 +81,13 @@ var Modal = Backbone.Model.extend({
     row.innerHTML      = '';
     row.appendChild(rowInput); 
   },
-  
   addStep: function(){
-
+  // ADD a step
   },
-  
   setFooter: function(content){
    $(this.modal + " .modal-footer").html(content); 
   },
-
   toggle: function(toggle, delay){
-  
      var delay = delay || 0;
      if(toggle === 'hide'){ 
       var that = this;
@@ -108,11 +97,9 @@ var Modal = Backbone.Model.extend({
         that.setBody('');
         that.clearStatus();
       }, delay);
-
      }else{
       $(this.modal).modal(toggle); 
      }  
   } 
-  
 });
 

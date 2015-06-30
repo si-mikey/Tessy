@@ -71,27 +71,27 @@ div.container-fluid
   
    $(document).ready(function(){
 
-      //Sets labels on the dropdowns with the selected values ( based on url params )
+      // Sets labels on the dropdowns with the selected values ( based on url params )
       Helper.setDropDownText();
 
-      //highlight row on click
+      // highlight row on click
       Helper.highlightTblRow("#scenariosTable tbody tr", "success"); 
       
-      //DataTable initialize
+      // DataTable initialize
       $("#scenariosTable").DataTable();    
   
-      //object to handle the modal 
+      // object to handle the modal 
       var modal = new Modal('.scenario-modal');
 
-      //object to get and update testcases
+      // object to get and update testcases
       var testCase = new TestCases();
 
-      //show modal with steps on double click
+      // show modal with steps on double click
       $("#scenariosTable tbody").on("dblclick", ".scenario-row", function(evt){
-       
         var modal        = new Modal('.scenario-modal');
         var row          = evt.target.parentNode;
         var scenarioName = row.children[1].innerHTML;
+        var scenarioId   = row.dataset.id;
         var stepIds      = row.dataset.steps;
         var modalData    = '';
         var stepsPromise = testCase.getSteps(stepIds);
@@ -99,7 +99,7 @@ div.container-fluid
          steps.map(function(step){
            modalData += "<div class='step-row' data-id='" + step.st_id + "'>" + step.st_text + "</div>";
           }); 
-         modal.setTitle(scenarioName);
+         modal.setTitle(scenarioName, scenarioId);
          modal.setBody(modalData);
          modal.toggle('show'); 
         }); 
@@ -108,6 +108,10 @@ div.container-fluid
       $(".modal-body").on('dblclick', ".step-row",  function(evt){
         modal.editStep(evt); 
       })
+
+      $(".modal-title").on("dblclick", function(evt){
+        modal.editTitle(evt);          
+      });
 
       $("#modal-save").on('click', function(evt){
         var steps = $("#scenarioSteps").serializeArray() 
@@ -137,10 +141,8 @@ div.container-fluid
       });
       
       $("#exec-customized").on('click', function(){
-
        var modal = new Modal('.scenario-modal');
        modal.setTitle('Execute Scenarios');
-
        modal.setBody('<div class="table-responsive"><table class="table"><td>Example!!</td></table></div>');
        modal.toggle('show');
       });
