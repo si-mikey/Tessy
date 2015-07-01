@@ -13,12 +13,10 @@ app.set('port', process.env.PORT || 8000);
 app.set('views', path.join(__dirname, 'lib/views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
-//app.use(express.cookieParser());
 app.use(express.session({secret: process.env.SECRET_SESS_KEY}));
 app.use(express.logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-//app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -27,7 +25,7 @@ if ('dev' == process.env.SITE_MODE) {
   app.use(express.errorHandler());
 }
 
-//verify user is logged in to view routes
+// verify user is logged in to view routes
 function requireLoggedIn(req, res, next){
   var routeName = req.route.params[0];
   if(typeof req.session.user == 'undefined' && routeName != 'login'){
@@ -37,7 +35,7 @@ function requireLoggedIn(req, res, next){
     }
 }    
 
-//set shared locals to all views if user is logged in
+// set shared locals to all views if user is logged in
 function setUser(req, res, next){
   if(typeof req.session.user == 'object'){
     var user = req.session.user;
@@ -46,7 +44,7 @@ function setUser(req, res, next){
     next();
 }
 
-//array of callbacks for routes
+// array of callbacks for routes
 var initSession = [requireLoggedIn, setUser];
 
 //route mappers
@@ -76,20 +74,15 @@ app.get('/logout', function(req, res, next){
   next();
 });
 
-
-
-//API ROUTES
+// API ROUTES
 app.get('/api/getAllCompanies',                     Tessy.getAllCompanies);
 app.get('/api/getTeamsByCompanyName/:companyName',  Tessy.getTeamsByCompanyName);
 app.get('/api/getComponentsByTeamName/:teamName',   Tessy.getComponentsByTeamName);
 
-//Testcase routes
+// Testcase routes
 app.get('/api/scenariosByCTCNames/:companyName/:teamName/:componentName', TestCases.scenariosByCTCNames);
 
-
-
-
-app.get('/api/steps/getById', TestCases.getStepsById); 
+app.get('/api/steps/getById', TestCases.getStepsByIds); 
 app.post('/api/steps/update', TestCases.updateStep); 
 
 
@@ -101,7 +94,7 @@ app.post('/api/steps/update', TestCases.updateStep);
 
 
 
-//start the server
+// start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
 });

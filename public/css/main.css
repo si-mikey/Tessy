@@ -100,7 +100,7 @@ div[role=navigation] .container { margin-left: 0px; }
 
 /* Modal Styles */
 .steps-input{
-  width: 550px;
+  width: 480px;
   height: 30px;
   padding-left: 10px;
 }
@@ -109,6 +109,13 @@ div[role=navigation] .container { margin-left: 0px; }
   height: 20px;
   width: 550px;
   margin-top: 20px;
+  position: relative;
+}
+
+.step-row form .btn-primary {
+  position: absolute;
+  right   : 10px;
+  top     : 0px;
 }
 
 .modal-body {

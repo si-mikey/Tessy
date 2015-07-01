@@ -35,7 +35,7 @@ var TestCases = Backbone.Model.extend({
            data: { stepIds : stepIds }
           });  
   },
-  saveStep : function(step){
+  updateStep : function(step){
    return $.ajax({
             type: "POST",
             url: "/api/steps/update",
@@ -63,23 +63,35 @@ var Modal = Backbone.Model.extend({
   setStatus: function(type, msg){
     $(this.modal + " .modal-body-status").addClass('alert-'+type).html(msg);
   },
-  clearStatus: function(){
-    $(this.modal + " .modal-body-status")
-      .removeClass('alert-danger').removeClass('alert-success').html('');
+  clearStatus: function(duration){
+    var that     = this;
+    var duration = duration || 0;
+    window.setTimeout(function(){
+      $(that.modal + " .modal-body-status")
+        .removeClass('alert-danger').removeClass('alert-success').html('');
+    }, duration);
   },
   setBody: function(content){
     $(this.modal + " .modal-body").html(content);
   },
   editStep: function(evt){
-    var stepId         = evt.target.dataset.id;
-    var stepText       = evt.target.innerHTML
-    var row            = evt.target;
-    var rowInput       = document.createElement("input");
-    rowInput.name      = stepId;
-    rowInput.value     = stepText;
-    rowInput.className = 'steps-input form-control';
-    row.innerHTML      = '';
-    row.appendChild(rowInput); 
+    var stepId           = evt.target.dataset.id;
+    var stepText         = evt.target.innerHTML
+    var row              = evt.target;
+    var rowInput         = document.createElement("input");
+    var tempForm         = document.createElement("form");
+    tempForm.className   = "step-form";
+    var submitBtn        = document.createElement("button");
+    submitBtn.className  = "btn btn-primary btn-sm step-form-submit";
+    submitBtn.innerHTML  = "Save";
+    submitBtn.type       = "submit";
+    rowInput.name        = stepId;
+    rowInput.value       = stepText;
+    rowInput.className   = "steps-input form-control";
+    row.innerHTML        = "";
+    tempForm.appendChild(rowInput);
+    tempForm.appendChild(submitBtn);
+    row.appendChild(tempForm); 
   },
   addStep: function(){
   // ADD a step
