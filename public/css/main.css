@@ -41,9 +41,6 @@ div[role=navigation] .container { margin-left: 0px; }
 
 /* DROP DOWN MENUS */
 
-
-
-
 #execute{
   float: right;
 }
@@ -60,7 +57,6 @@ div[role=navigation] .container { margin-left: 0px; }
 }
 
 /*DataTable overrides */
-
 
 
 @media (max-width:768px){ 
@@ -126,7 +122,6 @@ div[role=navigation] .container { margin-left: 0px; }
   font-weight: bold;
   text-align: center;
 }
-
 /* Modal Styles */
 
 #footer { 
