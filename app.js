@@ -86,14 +86,6 @@ app.get('/api/steps/getById', TestCases.getStepsByIds);
 app.post('/api/steps/update', TestCases.updateStep); 
 
 
-
-
-
-
-
-
-
-
 // start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Tessy started on port %d ', app.get('port'));
