@@ -52,7 +52,6 @@ app.get('/',      initSession, routes.home);
 app.get('/index', initSession, routes.home);
 app.get('/home',  initSession, routes.home);
 
-
 var callbacks = [Tessy.getAllCompanies, Tessy.getTeamsByCompanyName, Tessy.getComponentsByTeamName];
 callbacks.push(TestCases.scenariosByCTCNames);
 app.get('/testcases/:companyName?/:teamName?/:componentName?', initSession, callbacks, function(req, res, next){
@@ -82,6 +81,7 @@ app.get('/api/getComponentsByTeamName/:teamName',   Tessy.getComponentsByTeamNam
 // Testcase routes
 app.get('/api/scenariosByCTCNames/:companyName/:teamName/:componentName', TestCases.scenariosByCTCNames);
 
+app.post('/api/scenario/update', TestCases.updateScenario); 
 app.get('/api/steps/getById', TestCases.getStepsByIds); 
 app.post('/api/steps/update', TestCases.updateStep); 
 

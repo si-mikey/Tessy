@@ -99,6 +99,11 @@ div[role=navigation] .container { margin-left: 0px; }
 
 
 /* Modal Styles */
+
+.modal-title .form-control{
+  width: 480px;
+}
+
 .steps-input{
   width: 480px;
   height: 30px;
