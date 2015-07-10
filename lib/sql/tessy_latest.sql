@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.11-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.25, for osx10.10 (x86_64)
 --
 -- Host: localhost    Database: tessy
 -- ------------------------------------------------------
--- Server version	10.0.11-MariaDB-1~saucy-log
+-- Server version	5.6.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -60,7 +60,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'ShutterStock'),(2,'OffSet'),(3,'SkillFeed'),(4,'BigStock');
+INSERT INTO `company` VALUES (1,'WorkMarket'),(2,'OffSet'),(3,'SkillFeed'),(4,'BigStock');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,6 +97,7 @@ DROP TABLE IF EXISTS `devices`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `devices` (
   `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -252,7 +253,7 @@ CREATE TABLE `testcases_steps` (
 
 LOCK TABLES `testcases_steps` WRITE;
 /*!40000 ALTER TABLE `testcases_steps` DISABLE KEYS */;
-INSERT INTO `testcases_steps` VALUES (1,'Given I load the Login page'),(2,'When I enter valid credentials'),(3,'And I click on sign-in'),(4,'Then I should be logged-in'),(5,'And I see username in the header');
+INSERT INTO `testcases_steps` VALUES (1,'Given I load home page'),(2,'When I enter a search term \"汉语 / 漢語\"'),(3,'And I click on signIn'),(4,'And I should be loggedin'),(5,'Then I see my username on navbar');
 /*!40000 ALTER TABLE `testcases_steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-10-22 23:20:57
+-- Dump completed on 2015-07-10 13:51:27
