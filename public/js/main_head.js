@@ -54,6 +54,9 @@ var Modal = Backbone.Model.extend({
    var editInput       = document.createElement("input");
    editInput.value     = scenarioTitle;
    editInput.className = 'form-control'; 
+   var tempForm        = document.createElement("form");
+   tempForm.class      = 'step-form';
+   submitBtn           = document.createElement("button");
    $(this.modal + " .modal-title").html(editInput);
   },
   setTitle: function(newTitle, scenarioId){
