@@ -49,6 +49,7 @@ var Modal = Backbone.Model.extend({
    this.modal = modal;
   },
   editTitle: function(evt){
+   if(evt.target.children.length > 0) return;
    var elem            = evt.target;
    var scenarioTitle   = elem.innerHTML;
    var editInput       = document.createElement("input");
@@ -78,6 +79,7 @@ var Modal = Backbone.Model.extend({
     $(this.modal + " .modal-body").html(content);
   },
   editStep: function(evt){
+    if(evt.target.children.length > 0) return;
     var stepId           = evt.target.dataset.id;
     var stepText         = evt.target.innerHTML
     var row              = evt.target;
