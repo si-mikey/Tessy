@@ -60,7 +60,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'WorkMarket'),(2,'OffSet'),(3,'SkillFeed'),(4,'BigStock');
+INSERT INTO `company` VALUES (1,'WorkMarket');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +75,7 @@ CREATE TABLE `component` (
   `co_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `co_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`co_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `component` (
 
 LOCK TABLES `component` WRITE;
 /*!40000 ALTER TABLE `component` DISABLE KEYS */;
-INSERT INTO `component` VALUES (1,'Login'),(2,'Filters'),(3,'Header'),(4,'Footer');
+INSERT INTO `component` VALUES (1,'Login'),(2,'Filters'),(3,'Header'),(4,'Footer'),(5,'Dashboard'),(6,'WorkUpload'),(7,'Realtime'),(8,'Tests'),(9,'Payments'),(10,'Search'),(11,'Profile'),(12,'Projects'),(13,'Forums'),(14,'Notifications'),(15,'Market'),(16,'Groups'),(17,'Recruiting'),(18,'Surveys'),(19,'Invitations'),(20,'Accounts'),(21,'Blog'),(22,'Feedback'),(23,'Help Center'),(24,'Chat');
 /*!40000 ALTER TABLE `component` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,6 +186,7 @@ CREATE TABLE `testcase_executions` (
   `author_id` smallint(6) DEFAULT NULL,
   `tester_id` smallint(6) DEFAULT NULL,
   `device_id` tinyint(3) unsigned DEFAULT NULL,
+  `attachment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_device_id` (`device_id`),
   KEY `fk_tester_id` (`tester_id`),
@@ -217,6 +218,7 @@ CREATE TABLE `testcases` (
   `tc_scenario` varchar(255) NOT NULL,
   `tc_steps` varchar(255) DEFAULT NULL,
   `tc_relate_id` smallint(5) unsigned DEFAULT NULL,
+  `priority` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`tc_id`),
   KEY `tc_relate_id` (`tc_relate_id`),
   CONSTRAINT `testcases_ibfk_1` FOREIGN KEY (`tc_relate_id`) REFERENCES `relate` (`r_id`)
@@ -229,7 +231,7 @@ CREATE TABLE `testcases` (
 
 LOCK TABLES `testcases` WRITE;
 /*!40000 ALTER TABLE `testcases` DISABLE KEYS */;
-INSERT INTO `testcases` VALUES (1,'Verify login functionality','1,2,3,4,5',1),(3,'verify search','1,2',1),(4,'Verify Negative Login functionality',NULL,1),(5,'Verify Forgot Password',NULL,1),(6,'Verify Display Preferences - Mosaic',NULL,1),(7,'Verify Display Preferences - Large',NULL,1),(8,'Verify Display Preferences - Small',NULL,1),(9,'Verify Display Preferences - Show Preview',NULL,1),(10,'Verify Display Preferences - Safe Search',NULL,1),(11,'Verify Advanced Search - Media Type - All Images',NULL,1),(12,'Verify Advanced Search - Media Type - Photos',NULL,1),(13,'Verify Advanced Search - Media Type - Vectors',NULL,1),(14,'Verify Advanced Search - Media Type - Illustrations',NULL,1);
+INSERT INTO `testcases` VALUES (1,'Verify login functionality','1,2,3,4,5',1,NULL),(3,'verify search','1,2',1,NULL),(4,'Verify Negative Login functionality',NULL,1,NULL),(5,'Verify Forgot Password',NULL,1,NULL),(6,'Verify Display Preferences - Mosaic',NULL,1,NULL),(7,'Verify Display Preferences - Large',NULL,1,NULL),(8,'Verify Display Preferences - Small',NULL,1,NULL),(9,'Verify Display Preferences - Show Preview',NULL,1,NULL),(10,'Verify Display Preferences - Safe Search',NULL,1,NULL),(11,'Verify Advanced Search - Media Type - All Images',NULL,1,NULL),(12,'Verify Advanced Search - Media Type - Photos',NULL,1,NULL),(13,'Verify Advanced Search - Media Type - Vectors',NULL,5,NULL),(14,'Verify Advanced Search - Media Type - Illustrations',NULL,5,NULL);
 /*!40000 ALTER TABLE `testcases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-10 13:51:27
+-- Dump completed on 2015-07-14 12:13:51
