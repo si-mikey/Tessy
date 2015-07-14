@@ -73,6 +73,12 @@ app.get('/logout', function(req, res, next){
   next();
 });
 
+
+app.get('/modal', function(req, res, next){
+   res.render('comps/bs_modal', {title: 'Modal test'}); 
+});
+
+
 // API ROUTES
 app.get('/api/getAllCompanies',                     Tessy.getAllCompanies);
 app.get('/api/getTeamsByCompanyName/:companyName',  Tessy.getTeamsByCompanyName);
