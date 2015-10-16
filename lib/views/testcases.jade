@@ -111,17 +111,15 @@ div.container-fluid
       });
 
       $(".modal-body").on("submit", '.step-form',  function(evt){
-        evt.stopPropagation();  
-        evt.preventDefault();  
+        evt.stopPropagation();
+        evt.preventDefault();
         var saveStepPromise = testCase.updateStep($(this).serializeArray());
         saveStepPromise.success(function(result){
-          if(result === 'ok'){
-            modal.setStatus('success', 'Successfully saved your changes.');
-          }else{
+          modal.setStatus('success', 'Successfully saved your changes.');
+        }).fail(function(){
             modal.setStatus('danger', 'Could not save change.');
-          }
-          modal.clearStatus(3000);
-        }); 
+          })
+         modal.clearStatus(3000);
       });
 
       $(".modal-close").on("click", function(evt){

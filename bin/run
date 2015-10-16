@@ -6,6 +6,8 @@
 # checks arguments for env 
 [[ $@ =~ 'prod' ]] && export SITE_MODE='prod' || export SITE_MODE='dev'
 
+export PORT=8001
+
 # temp session key
 export SECRET_SESS_KEY=$(uuidgen)
 
