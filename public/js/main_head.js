@@ -101,6 +101,11 @@ var Modal = Backbone.Model.extend({
   addStep: function(){
   // ADD a step
   },
+  resetStep: function(evt){
+   var stepText = $(evt.target).find("input").val();
+   $(evt.target).parent().html(stepText);
+   $(evt.target).remove(); 
+  },
   setFooter: function(content){
    $(this.modal + " .modal-footer").html(content); 
   },

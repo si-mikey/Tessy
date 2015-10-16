@@ -120,6 +120,7 @@ div.container-fluid
             modal.setStatus('danger', 'Could not save change.');
           })
          modal.clearStatus(3000);
+         modal.resetStep(evt);
       });
 
       $(".modal-close").on("click", function(evt){
